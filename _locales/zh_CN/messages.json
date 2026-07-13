@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "AtCoder 暗色主题",
+    "description": "扩展名称"
+  },
+  "extDesc": {
+    "message": "AtCoder 深色主题 — 一键切换深浅色",
+    "description": "扩展描述"
+  },
+  "actionTitle": {
+    "message": "AtCoder 暗色主题",
+    "description": "工具栏提示"
+  }
+}

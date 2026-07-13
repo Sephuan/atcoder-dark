@@ -1,0 +1,124 @@
+:root {
+  color-scheme: dark;
+  --bg: #0d1117;
+  --elev: #161b22;
+  --border: #30363d;
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --accent: #388bfd;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 280px;
+  font: 13px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+main {
+  padding: 14px 16px 16px;
+}
+
+header {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 18px;
+  color: #fff;
+  background: linear-gradient(145deg, #1f6feb, #388bfd);
+}
+
+h1 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 650;
+}
+
+.sub {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.seg {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  padding: 3px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--elev);
+}
+
+.seg-btn {
+  appearance: none;
+  border: 0;
+  border-radius: 9px;
+  padding: 10px 8px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  background: transparent;
+  color: var(--muted);
+  transition: background 0.15s, color 0.15s;
+}
+
+.seg-btn:hover {
+  color: var(--text);
+}
+
+.seg-btn.active {
+  background: #1f6feb;
+  color: #fff;
+}
+
+.status {
+  margin: 12px 0 0;
+  min-height: 1.2em;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.hint {
+  margin: 6px 0 0;
+  color: #6e7681;
+  font-size: 11px;
+}
+
+.lang-block {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.lang-label {
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.seg-sm .seg-btn {
+  padding: 8px 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.seg-sm {
+  grid-template-columns: 1fr 1fr 1fr;
+}

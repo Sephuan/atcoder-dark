@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+.yarn/
+.bun/
+
+# Pack output
+dist/
+*.zip
+
+# Build / local
+build/
+out/
+*.local
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# IDE / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Logs / cache
+*.log
+.cache/
+.turbo/
+coverage/
+screenshots/
+
+# Puppeteer / local Chrome profile (never commit)
+.puppeteer/
+.chrome-profile/
+.stop-browser

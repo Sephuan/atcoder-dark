@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "AtCoder Dark",
+    "description": "Extension name"
+  },
+  "extDesc": {
+    "message": "Dark theme for AtCoder — one-click light/dark switch",
+    "description": "Extension description"
+  },
+  "actionTitle": {
+    "message": "AtCoder Dark",
+    "description": "Toolbar tooltip"
+  }
+}

@@ -1,0 +1,1279 @@
+/* AtCoder Dark — default ON. Add html.atcoder-dark-off to disable (anti-FOUC). */
+html:not(.atcoder-dark-off) {
+  color-scheme: dark;
+
+  --ad-bg: #0d1117;
+  --ad-bg-elevated: #161b22;
+  --ad-bg-soft: #1c2128;
+  --ad-bg-muted: #21262d;
+  --ad-border: #30363d;
+  --ad-border-soft: #21262d;
+  --ad-text: #e6edf3;
+  --ad-text-muted: #8b949e;
+  --ad-text-dim: #6e7681;
+  --ad-link: #58a6ff;
+  --ad-link-hover: #79b8ff;
+  --ad-accent: #388bfd;
+  --ad-success: #3fb950;
+  --ad-danger: #f85149;
+  --ad-warning: #d29922;
+  --ad-info: #58a6ff;
+  --ad-shadow: rgba(0, 0, 0, 0.45);
+  --ad-code-bg: #0d1117;
+  --ad-pre-bg: #161b22;
+  --ad-input-bg: #0d1117;
+  /* High-contrast syntax (GitHub Dark Dimmed / One Dark inspired) */
+  --ad-syn-fg: #e6edf3;
+  --ad-syn-comment: #8b949e;
+  --ad-syn-keyword: #ff7b72;
+  --ad-syn-string: #a5d6ff;
+  --ad-syn-number: #79c0ff;
+  --ad-syn-type: #ffa657;
+  --ad-syn-func: #d2a8ff;
+  --ad-syn-operator: #ff7b72;
+  --ad-syn-constant: #79c0ff;
+  --ad-syn-tag: #7ee787;
+  --ad-syn-attr: #79c0ff;
+  --ad-syn-builtin: #ffa657;
+  --ad-syn-gutter: #6e7681;
+  --ad-syn-gutter-bg: #161b22;
+  --ad-syn-line-hl: rgba(56, 139, 253, 0.14);
+  --ad-syn-select: rgba(56, 139, 253, 0.35);
+  --ad-table-stripe: #161b22;
+  --ad-table-hover: #1f2937;
+  --ad-navbar: #010409;
+  --ad-selection: rgba(56, 139, 253, 0.35);
+}
+
+html:not(.atcoder-dark-off) ::selection {
+  background: var(--ad-selection);
+  color: var(--ad-text);
+}
+
+/* ── Page shell ─────────────────────────────────────────── */
+html:not(.atcoder-dark-off),
+html:not(.atcoder-dark-off) body {
+  background-color: var(--ad-bg) !important;
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) #main-div,
+html:not(.atcoder-dark-off) #main-div.float-container {
+  background: var(--ad-bg) !important;
+}
+
+html:not(.atcoder-dark-off) #main-container,
+html:not(.atcoder-dark-off) .float-container > #main-container {
+  background: var(--ad-bg-elevated) !important;
+  box-shadow: 0 0 24px var(--ad-shadow) !important;
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) hr {
+  border-color: var(--ad-border) !important;
+}
+
+/* ── Typography & links ─────────────────────────────────── */
+html:not(.atcoder-dark-off) h1,
+html:not(.atcoder-dark-off) h2,
+html:not(.atcoder-dark-off) h3,
+html:not(.atcoder-dark-off) h4,
+html:not(.atcoder-dark-off) h5,
+html:not(.atcoder-dark-off) h6,
+html:not(.atcoder-dark-off) .h1,
+html:not(.atcoder-dark-off) .h2,
+html:not(.atcoder-dark-off) .h3,
+html:not(.atcoder-dark-off) .h4,
+html:not(.atcoder-dark-off) .h5,
+html:not(.atcoder-dark-off) .h6 {
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) p,
+html:not(.atcoder-dark-off) li,
+html:not(.atcoder-dark-off) td,
+html:not(.atcoder-dark-off) th,
+html:not(.atcoder-dark-off) label,
+html:not(.atcoder-dark-off) small,
+html:not(.atcoder-dark-off) span:not([class*="user-"]):not([class*="label"]):not(.badge):not(.caret) {
+  /* keep default inheritance; avoid nuking rank colors */
+}
+
+html:not(.atcoder-dark-off) a:not(.btn):not(.label):not(.username):not(.contest-title) {
+  color: var(--ad-link) !important;
+}
+
+html:not(.atcoder-dark-off) a:not(.btn):not(.label):not(.username):not(.contest-title):hover {
+  color: var(--ad-link-hover) !important;
+}
+
+html:not(.atcoder-dark-off) a.btn-text {
+  color: var(--ad-link) !important;
+}
+
+html:not(.atcoder-dark-off) .btn-text-group span.divider:before {
+  color: var(--ad-border) !important;
+}
+
+html:not(.atcoder-dark-off) .gray,
+html:not(.atcoder-dark-off) .grey {
+  color: var(--ad-text-dim) !important;
+}
+
+html:not(.atcoder-dark-off) .dark-grey {
+  color: var(--ad-text-muted) !important;
+}
+
+html:not(.atcoder-dark-off) .black {
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .blue {
+  color: var(--ad-link) !important;
+}
+
+/* Preserve rank / status colors — lighten slightly for dark bg */
+html:not(.atcoder-dark-off) .user-red { color: #ff6b6b !important; }
+html:not(.atcoder-dark-off) .user-orange { color: #ffa94d !important; }
+html:not(.atcoder-dark-off) .user-yellow { color: #ffd43b !important; }
+html:not(.atcoder-dark-off) .user-blue { color: #74c0fc !important; }
+html:not(.atcoder-dark-off) .user-cyan { color: #66d9e8 !important; }
+html:not(.atcoder-dark-off) .user-green { color: #69db7c !important; }
+html:not(.atcoder-dark-off) .user-brown { color: #d4a574 !important; }
+html:not(.atcoder-dark-off) .user-gray { color: #adb5bd !important; }
+html:not(.atcoder-dark-off) .user-unrated { color: #c9d1d9 !important; }
+html:not(.atcoder-dark-off) .user-admin { color: #da77f2 !important; }
+
+html:not(.atcoder-dark-off) .green,
+html:not(.atcoder-dark-off) .standings-ac {
+  color: var(--ad-success) !important;
+}
+
+html:not(.atcoder-dark-off) .red,
+html:not(.atcoder-dark-off) .standings-wa,
+html:not(.atcoder-dark-off) span.danger {
+  color: var(--ad-danger) !important;
+}
+
+html:not(.atcoder-dark-off) .standings-score {
+  color: #79c0ff !important;
+}
+
+html:not(.atcoder-dark-off) span.success {
+  color: var(--ad-success) !important;
+}
+
+/* ── Navbar ─────────────────────────────────────────────── */
+html:not(.atcoder-dark-off) .navbar-inverse {
+  background-color: var(--ad-navbar) !important;
+  border-color: var(--ad-border) !important;
+}
+
+html:not(.atcoder-dark-off) .navbar-inverse .navbar-nav > li > a {
+  color: #c9d1d9 !important;
+}
+
+html:not(.atcoder-dark-off) .navbar-inverse .navbar-nav > li > a:hover,
+html:not(.atcoder-dark-off) .navbar-inverse .navbar-nav > .open > a,
+html:not(.atcoder-dark-off) .navbar-inverse .navbar-nav > .open > a:hover,
+html:not(.atcoder-dark-off) .navbar-inverse .navbar-nav > .open > a:focus {
+  background-color: var(--ad-bg-muted) !important;
+  color: #fff !important;
+}
+
+html:not(.atcoder-dark-off) .navbar-inverse .navbar-toggle {
+  border-color: var(--ad-border) !important;
+}
+
+html:not(.atcoder-dark-off) .navbar-inverse .navbar-toggle .icon-bar {
+  background-color: #c9d1d9 !important;
+}
+
+html:not(.atcoder-dark-off) .navbar-inverse .navbar-collapse,
+html:not(.atcoder-dark-off) .navbar-inverse .navbar-form {
+  border-color: var(--ad-border) !important;
+}
+
+html:not(.atcoder-dark-off) .contest-title {
+  color: #fff !important;
+}
+
+/* Dropdowns */
+html:not(.atcoder-dark-off) .dropdown-menu {
+  background-color: var(--ad-bg-elevated) !important;
+  border-color: var(--ad-border) !important;
+  box-shadow: 0 8px 24px var(--ad-shadow) !important;
+}
+
+html:not(.atcoder-dark-off) .dropdown-menu > li > a {
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .dropdown-menu > li > a:hover,
+html:not(.atcoder-dark-off) .dropdown-menu > li > a:focus {
+  background-color: var(--ad-bg-muted) !important;
+  color: #fff !important;
+}
+
+html:not(.atcoder-dark-off) .dropdown-menu .divider {
+  background-color: var(--ad-border) !important;
+}
+
+/* ── Contest nav tabs ───────────────────────────────────── */
+html:not(.atcoder-dark-off) #contest-nav-tabs.cnvtb-fixed,
+html:not(.atcoder-dark-off) .cnvtb-fixed {
+  background-color: var(--ad-bg-elevated) !important;
+}
+
+html:not(.atcoder-dark-off) small.contest-duration,
+html:not(.atcoder-dark-off) small.contest-duration a {
+  color: var(--ad-text-muted) !important;
+}
+
+html:not(.atcoder-dark-off) .nav-tabs {
+  border-bottom-color: var(--ad-border) !important;
+}
+
+html:not(.atcoder-dark-off) .nav-tabs > li > a {
+  color: var(--ad-text-muted) !important;
+  background: transparent !important;
+}
+
+html:not(.atcoder-dark-off) .nav-tabs > li > a:hover {
+  background-color: var(--ad-bg-muted) !important;
+  border-color: var(--ad-border) var(--ad-border) transparent !important;
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .nav-tabs > li.active > a,
+html:not(.atcoder-dark-off) .nav-tabs > li.active > a:hover,
+html:not(.atcoder-dark-off) .nav-tabs > li.active > a:focus {
+  background-color: var(--ad-bg-elevated) !important;
+  border-color: var(--ad-border) var(--ad-border) transparent !important;
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) #fix-cnvtb,
+html:not(.atcoder-dark-off) #fix-cnvtb:hover {
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) #fix-cnvtb.disabled,
+html:not(.atcoder-dark-off) #fix-cnvtb.disabled:hover {
+  color: var(--ad-text-dim) !important;
+}
+
+/* ── Tables ─────────────────────────────────────────────── */
+html:not(.atcoder-dark-off) .table {
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .table > thead > tr > th,
+html:not(.atcoder-dark-off) .table > tbody > tr > th,
+html:not(.atcoder-dark-off) .table > tfoot > tr > th,
+html:not(.atcoder-dark-off) .table > thead > tr > td,
+html:not(.atcoder-dark-off) .table > tbody > tr > td,
+html:not(.atcoder-dark-off) .table > tfoot > tr > td {
+  border-color: var(--ad-border) !important;
+}
+
+html:not(.atcoder-dark-off) .table-bordered,
+html:not(.atcoder-dark-off) .table-bordered > thead > tr > th,
+html:not(.atcoder-dark-off) .table-bordered > tbody > tr > th,
+html:not(.atcoder-dark-off) .table-bordered > tfoot > tr > th,
+html:not(.atcoder-dark-off) .table-bordered > thead > tr > td,
+html:not(.atcoder-dark-off) .table-bordered > tbody > tr > td,
+html:not(.atcoder-dark-off) .table-bordered > tfoot > tr > td {
+  border-color: var(--ad-border) !important;
+}
+
+html:not(.atcoder-dark-off) .table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: var(--ad-table-stripe) !important;
+}
+
+html:not(.atcoder-dark-off) .table-striped > tbody > tr:nth-of-type(even) {
+  background-color: var(--ad-bg-elevated) !important;
+}
+
+html:not(.atcoder-dark-off) .table-hover > tbody > tr:hover {
+  background-color: var(--ad-table-hover) !important;
+}
+
+html:not(.atcoder-dark-off) .table > thead > tr > th {
+  background-color: var(--ad-bg-soft) !important;
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .tr-grey th,
+html:not(.atcoder-dark-off) .tr-grey td {
+  background-color: var(--ad-bg-muted) !important;
+}
+
+/* Standings */
+html:not(.atcoder-dark-off) .standings-frozen {
+  background-color: rgba(56, 139, 253, 0.18) !important;
+}
+
+html:not(.atcoder-dark-off) .standings-fa td {
+  border-top-color: var(--ad-border) !important;
+}
+
+html:not(.atcoder-dark-off) .standings-result p,
+html:not(.atcoder-dark-off) .standings-statistics td p,
+html:not(.atcoder-dark-off) .standings-fa td p,
+html:not(.atcoder-dark-off) #last-refresh {
+  color: var(--ad-text-muted) !important;
+}
+
+html:not(.atcoder-dark-off) .standings-per-page.selected {
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .ranking-affiliation,
+html:not(.atcoder-dark-off) .standings-affiliation {
+  color: var(--ad-text-dim) !important;
+}
+
+/* ── Panels ─────────────────────────────────────────────── */
+html:not(.atcoder-dark-off) .panel {
+  background-color: var(--ad-bg-elevated) !important;
+  border-color: var(--ad-border) !important;
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .panel-default {
+  border-color: var(--ad-border) !important;
+}
+
+html:not(.atcoder-dark-off) .panel-default > .panel-heading,
+html:not(.atcoder-dark-off) .panel-default .post-heading {
+  background-color: var(--ad-bg-soft) !important;
+  border-color: var(--ad-border) !important;
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .panel-default > .panel-heading .panel-title,
+html:not(.atcoder-dark-off) .panel-default .panel-title a {
+  color: var(--ad-link) !important;
+}
+
+html:not(.atcoder-dark-off) .panel-body,
+html:not(.atcoder-dark-off) .panel-footer,
+html:not(.atcoder-dark-off) .post-footer {
+  background-color: var(--ad-bg-elevated) !important;
+  border-color: var(--ad-border) !important;
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .panel-primary > .panel-heading {
+  background-color: #1f3a5f !important;
+  border-color: #2d4a73 !important;
+}
+
+html:not(.atcoder-dark-off) .panel-success > .panel-heading {
+  background-color: #1a3d2a !important;
+  border-color: #2d5a3d !important;
+  color: #7ee787 !important;
+}
+
+html:not(.atcoder-dark-off) .panel-info > .panel-heading {
+  background-color: #1a3040 !important;
+  border-color: #2d4a5a !important;
+  color: #79c0ff !important;
+}
+
+html:not(.atcoder-dark-off) .panel-warning > .panel-heading {
+  background-color: #3d3010 !important;
+  border-color: #5a4a1a !important;
+  color: #e3b341 !important;
+}
+
+html:not(.atcoder-dark-off) .panel-danger > .panel-heading {
+  background-color: #3d1515 !important;
+  border-color: #5a2020 !important;
+  color: #ff7b72 !important;
+}
+
+html:not(.atcoder-dark-off) .panel-filter .panel-heading {
+  border-bottom-color: var(--ad-border) !important;
+}
+
+html:not(.atcoder-dark-off) .filter-body-heading {
+  border-bottom-color: var(--ad-border) !important;
+}
+
+/* ── Forms & inputs ─────────────────────────────────────── */
+html:not(.atcoder-dark-off) .form-control,
+html:not(.atcoder-dark-off) input[type="text"],
+html:not(.atcoder-dark-off) input[type="password"],
+html:not(.atcoder-dark-off) input[type="email"],
+html:not(.atcoder-dark-off) input[type="number"],
+html:not(.atcoder-dark-off) input[type="search"],
+html:not(.atcoder-dark-off) input[type="url"],
+html:not(.atcoder-dark-off) textarea,
+html:not(.atcoder-dark-off) select {
+  background-color: var(--ad-input-bg) !important;
+  border-color: var(--ad-border) !important;
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .form-control:focus,
+html:not(.atcoder-dark-off) input:focus,
+html:not(.atcoder-dark-off) textarea:focus,
+html:not(.atcoder-dark-off) select:focus {
+  border-color: var(--ad-accent) !important;
+  box-shadow: 0 0 0 2px rgba(56, 139, 253, 0.25) !important;
+  background-color: var(--ad-input-bg) !important;
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .form-control[disabled],
+html:not(.atcoder-dark-off) .form-control[readonly],
+html:not(.atcoder-dark-off) fieldset[disabled] .form-control {
+  background-color: var(--ad-bg-muted) !important;
+  color: var(--ad-text-dim) !important;
+}
+
+html:not(.atcoder-dark-off) .input-group-addon {
+  background-color: var(--ad-bg-muted) !important;
+  border-color: var(--ad-border) !important;
+  color: var(--ad-text-muted) !important;
+}
+
+html:not(.atcoder-dark-off) ::placeholder {
+  color: var(--ad-text-dim) !important;
+  opacity: 1;
+}
+
+/* Select2 (used on standings filters) */
+html:not(.atcoder-dark-off) .select2-container--default .select2-selection--single,
+html:not(.atcoder-dark-off) .select2-container--default .select2-selection--multiple {
+  background-color: var(--ad-input-bg) !important;
+  border-color: var(--ad-border) !important;
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .select2-container--default .select2-selection--single .select2-selection__rendered {
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .select2-dropdown {
+  background-color: var(--ad-bg-elevated) !important;
+  border-color: var(--ad-border) !important;
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .select2-container--default .select2-results__option--highlighted[aria-selected] {
+  background-color: var(--ad-accent) !important;
+}
+
+html:not(.atcoder-dark-off) .select2-container--default .select2-results__option[aria-selected="true"] {
+  background-color: var(--ad-bg-muted) !important;
+}
+
+/* ── Buttons ────────────────────────────────────────────── */
+html:not(.atcoder-dark-off) .btn-default {
+  background-color: var(--ad-bg-muted) !important;
+  border-color: var(--ad-border) !important;
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .btn-default:hover,
+html:not(.atcoder-dark-off) .btn-default:focus,
+html:not(.atcoder-dark-off) .btn-default:active,
+html:not(.atcoder-dark-off) .btn-default.active {
+  background-color: #30363d !important;
+  border-color: #484f58 !important;
+  color: #fff !important;
+}
+
+html:not(.atcoder-dark-off) .editor-buttons .btn-default:focus {
+  background-color: var(--ad-bg-muted) !important;
+}
+
+html:not(.atcoder-dark-off) .btn-primary {
+  background-color: #1f6feb !important;
+  border-color: #1f6feb !important;
+  color: #fff !important;
+}
+
+html:not(.atcoder-dark-off) .btn-primary:hover,
+html:not(.atcoder-dark-off) .btn-primary:focus {
+  background-color: #388bfd !important;
+  border-color: #388bfd !important;
+}
+
+html:not(.atcoder-dark-off) .btn-success {
+  background-color: #238636 !important;
+  border-color: #238636 !important;
+  color: #fff !important;
+}
+
+html:not(.atcoder-dark-off) .btn-info {
+  background-color: #1f6feb !important;
+  border-color: #1f6feb !important;
+}
+
+html:not(.atcoder-dark-off) .btn-warning {
+  background-color: #9e6a03 !important;
+  border-color: #9e6a03 !important;
+  color: #fff !important;
+}
+
+html:not(.atcoder-dark-off) .btn-danger {
+  background-color: #da3633 !important;
+  border-color: #da3633 !important;
+}
+
+html:not(.atcoder-dark-off) .btn-link {
+  color: var(--ad-link) !important;
+}
+
+/* ── Labels & badges ────────────────────────────────────── */
+html:not(.atcoder-dark-off) .label-default {
+  background-color: #484f58 !important;
+}
+
+html:not(.atcoder-dark-off) .label-primary {
+  background-color: #1f6feb !important;
+}
+
+html:not(.atcoder-dark-off) .label-success {
+  background-color: #238636 !important;
+}
+
+html:not(.atcoder-dark-off) .label-info {
+  background-color: #1f6feb !important;
+}
+
+html:not(.atcoder-dark-off) .label-warning {
+  background-color: #9e6a03 !important;
+}
+
+html:not(.atcoder-dark-off) .label-danger {
+  background-color: #da3633 !important;
+}
+
+html:not(.atcoder-dark-off) .badge {
+  background-color: #484f58 !important;
+  color: #fff !important;
+}
+
+/* ── Alerts ─────────────────────────────────────────────── */
+html:not(.atcoder-dark-off) .alert-success {
+  background-color: #12261a !important;
+  border-color: #238636 !important;
+  color: #7ee787 !important;
+}
+
+html:not(.atcoder-dark-off) .alert-info {
+  background-color: #0d2137 !important;
+  border-color: #1f6feb !important;
+  color: #79c0ff !important;
+}
+
+html:not(.atcoder-dark-off) .alert-warning {
+  background-color: #2a2000 !important;
+  border-color: #9e6a03 !important;
+  color: #e3b341 !important;
+}
+
+html:not(.atcoder-dark-off) .alert-danger {
+  background-color: #2d1214 !important;
+  border-color: #da3633 !important;
+  color: #ff7b72 !important;
+}
+
+/* ── Code / pre / KaTeX ─────────────────────────────────── */
+html:not(.atcoder-dark-off) pre,
+html:not(.atcoder-dark-off) code,
+html:not(.atcoder-dark-off) kbd,
+html:not(.atcoder-dark-off) samp {
+  background-color: var(--ad-pre-bg) !important;
+  color: var(--ad-syn-fg) !important;
+  border-color: var(--ad-border) !important;
+}
+
+/* Sample I/O blocks — slightly elevated for readability */
+html:not(.atcoder-dark-off) #task-statement pre,
+html:not(.atcoder-dark-off) .part pre,
+html:not(.atcoder-dark-off) pre:not(.ace_editor) {
+  background-color: #0d1117 !important;
+  border: 1px solid var(--ad-border) !important;
+  color: #f0f6fc !important;
+  font-size: 13px !important;
+  line-height: 1.55 !important;
+}
+
+html:not(.atcoder-dark-off) pre.prettyprint,
+html:not(.atcoder-dark-off) .prettyprint {
+  background-color: var(--ad-code-bg) !important;
+  border-color: var(--ad-border) !important;
+  color: var(--ad-syn-fg) !important;
+}
+
+html:not(.atcoder-dark-off) ol.linenums {
+  background-color: var(--ad-code-bg) !important;
+  color: var(--ad-syn-gutter) !important;
+}
+
+html:not(.atcoder-dark-off) li.L0,
+html:not(.atcoder-dark-off) li.L1,
+html:not(.atcoder-dark-off) li.L2,
+html:not(.atcoder-dark-off) li.L3,
+html:not(.atcoder-dark-off) li.L4,
+html:not(.atcoder-dark-off) li.L5,
+html:not(.atcoder-dark-off) li.L6,
+html:not(.atcoder-dark-off) li.L7,
+html:not(.atcoder-dark-off) li.L8,
+html:not(.atcoder-dark-off) li.L9 {
+  background-color: var(--ad-code-bg) !important;
+  color: var(--ad-syn-fg) !important;
+  border-left: 1px solid var(--ad-border) !important;
+}
+
+html:not(.atcoder-dark-off) .btn-pre {
+  color: var(--ad-text-muted) !important;
+  background-color: var(--ad-bg-muted) !important;
+  border-color: var(--ad-border) !important;
+}
+
+html:not(.atcoder-dark-off) .btn-pre:hover {
+  color: #fff !important;
+  background-color: #6e40c9 !important;
+  border-color: #6e40c9 !important;
+}
+
+/* google-code-prettify tokens (high contrast) */
+html:not(.atcoder-dark-off) .com { color: var(--ad-syn-comment) !important; font-style: italic; }
+html:not(.atcoder-dark-off) .kwd { color: var(--ad-syn-keyword) !important; font-weight: 600; }
+html:not(.atcoder-dark-off) .str { color: var(--ad-syn-string) !important; }
+html:not(.atcoder-dark-off) .lit { color: var(--ad-syn-number) !important; }
+html:not(.atcoder-dark-off) .typ { color: var(--ad-syn-type) !important; }
+html:not(.atcoder-dark-off) .pun,
+html:not(.atcoder-dark-off) .opn,
+html:not(.atcoder-dark-off) .clo { color: var(--ad-syn-fg) !important; }
+html:not(.atcoder-dark-off) .pln { color: var(--ad-syn-fg) !important; }
+html:not(.atcoder-dark-off) .tag { color: var(--ad-syn-tag) !important; }
+html:not(.atcoder-dark-off) .atn { color: var(--ad-syn-attr) !important; }
+html:not(.atcoder-dark-off) .atv { color: var(--ad-syn-string) !important; }
+html:not(.atcoder-dark-off) .dec,
+html:not(.atcoder-dark-off) .var { color: var(--ad-syn-type) !important; }
+html:not(.atcoder-dark-off) .fun { color: var(--ad-syn-func) !important; }
+
+/* ACE editor chrome */
+html:not(.atcoder-dark-off) #editor,
+html:not(.atcoder-dark-off) #submission-code,
+html:not(.atcoder-dark-off) #plain-textarea,
+html:not(.atcoder-dark-off) .ace_editor {
+  background-color: var(--ad-code-bg) !important;
+  color: var(--ad-syn-fg) !important;
+  border-color: var(--ad-border) !important;
+}
+
+html:not(.atcoder-dark-off) .ace_gutter {
+  background: var(--ad-syn-gutter-bg) !important;
+  color: var(--ad-syn-gutter) !important;
+  border-right: 1px solid var(--ad-border) !important;
+}
+
+html:not(.atcoder-dark-off) .ace_scroller {
+  background-color: var(--ad-code-bg) !important;
+}
+
+html:not(.atcoder-dark-off) #submission-code .ace_cursor,
+html:not(.atcoder-dark-off) .ace_cursor {
+  color: var(--ad-syn-fg) !important;
+  border-left-color: #58a6ff !important;
+}
+
+/*
+ * ACE default theme is ace-tm (light). Override every token for dark bg.
+ * High-contrast palette — keywords coral, strings sky, numbers cyan, types amber, funcs violet.
+ */
+html:not(.atcoder-dark-off) .ace_editor,
+html:not(.atcoder-dark-off) .ace-tm {
+  background-color: var(--ad-code-bg) !important;
+  color: var(--ad-syn-fg) !important;
+}
+
+html:not(.atcoder-dark-off) .ace-tm .ace_gutter,
+html:not(.atcoder-dark-off) .ace_editor .ace_gutter {
+  background: var(--ad-syn-gutter-bg) !important;
+  color: var(--ad-syn-gutter) !important;
+}
+
+html:not(.atcoder-dark-off) .ace-tm .ace_print-margin,
+html:not(.atcoder-dark-off) .ace_print-margin {
+  width: 1px !important;
+  background: var(--ad-border) !important;
+}
+
+html:not(.atcoder-dark-off) .ace-tm .ace_cursor,
+html:not(.atcoder-dark-off) .ace_cursor {
+  color: #58a6ff !important;
+  border-left: 2px solid #58a6ff !important;
+}
+
+html:not(.atcoder-dark-off) .ace-tm .ace_marker-layer .ace_selection,
+html:not(.atcoder-dark-off) .ace_marker-layer .ace_selection {
+  background: var(--ad-syn-select) !important;
+}
+
+html:not(.atcoder-dark-off) .ace-tm .ace_marker-layer .ace_active-line,
+html:not(.atcoder-dark-off) .ace_marker-layer .ace_active-line,
+html:not(.atcoder-dark-off) .ace-tm .ace_gutter-active-line,
+html:not(.atcoder-dark-off) .ace_gutter-active-line {
+  background: var(--ad-syn-line-hl) !important;
+}
+
+html:not(.atcoder-dark-off) .ace-tm .ace_marker-layer .ace_selected-word,
+html:not(.atcoder-dark-off) .ace_marker-layer .ace_selected-word {
+  border: 1px solid #388bfd !important;
+  background: rgba(56, 139, 253, 0.15) !important;
+}
+
+/* Keywords: #define, if, for, return, … */
+html:not(.atcoder-dark-off) .ace_keyword,
+html:not(.atcoder-dark-off) .ace-tm .ace_keyword,
+html:not(.atcoder-dark-off) .ace_keyword.ace_control,
+html:not(.atcoder-dark-off) .ace_keyword.ace_operator {
+  color: var(--ad-syn-keyword) !important;
+}
+
+/* Types / storage: void, int, long, class, … */
+html:not(.atcoder-dark-off) .ace_storage,
+html:not(.atcoder-dark-off) .ace_storage.ace_type,
+html:not(.atcoder-dark-off) .ace-tm .ace_storage,
+html:not(.atcoder-dark-off) .ace-tm .ace_storage.ace_type,
+html:not(.atcoder-dark-off) .ace_support.ace_type,
+html:not(.atcoder-dark-off) .ace_support.ace_class {
+  color: var(--ad-syn-type) !important;
+}
+
+/* Constants / macros / numbers */
+html:not(.atcoder-dark-off) .ace_constant,
+html:not(.atcoder-dark-off) .ace_constant.ace_numeric,
+html:not(.atcoder-dark-off) .ace_constant.ace_language,
+html:not(.atcoder-dark-off) .ace_constant.ace_other,
+html:not(.atcoder-dark-off) .ace-tm .ace_constant,
+html:not(.atcoder-dark-off) .ace-tm .ace_constant.ace_numeric {
+  color: var(--ad-syn-number) !important;
+}
+
+/* Strings */
+html:not(.atcoder-dark-off) .ace_string,
+html:not(.atcoder-dark-off) .ace_string.ace_regexp,
+html:not(.atcoder-dark-off) .ace-tm .ace_string {
+  color: var(--ad-syn-string) !important;
+}
+
+/* Comments */
+html:not(.atcoder-dark-off) .ace_comment,
+html:not(.atcoder-dark-off) .ace_comment.ace_doc,
+html:not(.atcoder-dark-off) .ace-tm .ace_comment {
+  color: var(--ad-syn-comment) !important;
+  font-style: italic !important;
+}
+
+/* Builtins / library functions (cin, cos, …) */
+html:not(.atcoder-dark-off) .ace_support.ace_function,
+html:not(.atcoder-dark-off) .ace_support.ace_constant,
+html:not(.atcoder-dark-off) .ace-tm .ace_support.ace_function {
+  color: var(--ad-syn-func) !important;
+}
+
+/* Identifiers / plain text */
+html:not(.atcoder-dark-off) .ace_identifier,
+html:not(.atcoder-dark-off) .ace_variable,
+html:not(.atcoder-dark-off) .ace-tm .ace_identifier {
+  color: var(--ad-syn-fg) !important;
+}
+
+/* Operators / punctuation */
+html:not(.atcoder-dark-off) .ace_punctuation,
+html:not(.atcoder-dark-off) .ace_paren,
+html:not(.atcoder-dark-off) .ace_operator,
+html:not(.atcoder-dark-off) .ace-tm .ace_keyword.ace_operator {
+  color: #ff9cac !important;
+}
+
+html:not(.atcoder-dark-off) .ace_paren.ace_lparen,
+html:not(.atcoder-dark-off) .ace_paren.ace_rparen {
+  color: var(--ad-syn-fg) !important;
+}
+
+/* Preprocessor-ish / meta */
+html:not(.atcoder-dark-off) .ace_meta,
+html:not(.atcoder-dark-off) .ace_meta.ace_tag {
+  color: var(--ad-syn-keyword) !important;
+}
+
+html:not(.atcoder-dark-off) .ace_entity.ace_name.ace_function,
+html:not(.atcoder-dark-off) .ace_entity.ace_name {
+  color: var(--ad-syn-func) !important;
+}
+
+html:not(.atcoder-dark-off) .ace_indent-guide {
+  border-right: 1px solid #21262d !important;
+  background: none !important;
+  opacity: 0.7;
+}
+
+html:not(.atcoder-dark-off) .ace_fold-widget {
+  background-color: transparent !important;
+  border-color: var(--ad-syn-gutter) !important;
+  color: var(--ad-syn-gutter) !important;
+}
+
+/* KaTeX: keep formulas readable */
+html:not(.atcoder-dark-off) .katex,
+html:not(.atcoder-dark-off) .katex-display {
+  color: var(--ad-text) !important;
+}
+
+/* ── Modals ─────────────────────────────────────────────── */
+html:not(.atcoder-dark-off) .modal-content {
+  background-color: var(--ad-bg-elevated) !important;
+  border-color: var(--ad-border) !important;
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .modal-header,
+html:not(.atcoder-dark-off) .modal-footer {
+  border-color: var(--ad-border) !important;
+}
+
+html:not(.atcoder-dark-off) .modal-header .close {
+  color: var(--ad-text) !important;
+  opacity: 0.7;
+  text-shadow: none !important;
+}
+
+html:not(.atcoder-dark-off) .modal-backdrop {
+  background-color: #000 !important;
+}
+
+/* ── Pagination ─────────────────────────────────────────── */
+html:not(.atcoder-dark-off) .pagination > li > a,
+html:not(.atcoder-dark-off) .pagination > li > span {
+  background-color: var(--ad-bg-elevated) !important;
+  border-color: var(--ad-border) !important;
+  color: var(--ad-link) !important;
+}
+
+html:not(.atcoder-dark-off) .pagination > li > a:hover,
+html:not(.atcoder-dark-off) .pagination > li > span:hover {
+  background-color: var(--ad-bg-muted) !important;
+  border-color: var(--ad-border) !important;
+  color: var(--ad-link-hover) !important;
+}
+
+html:not(.atcoder-dark-off) .pagination > .active > a,
+html:not(.atcoder-dark-off) .pagination > .active > span,
+html:not(.atcoder-dark-off) .pagination > .active > a:hover,
+html:not(.atcoder-dark-off) .pagination > .active > span:hover {
+  background-color: #1f6feb !important;
+  border-color: #1f6feb !important;
+  color: #fff !important;
+}
+
+html:not(.atcoder-dark-off) .pagination > .disabled > a,
+html:not(.atcoder-dark-off) .pagination > .disabled > span {
+  background-color: var(--ad-bg-elevated) !important;
+  border-color: var(--ad-border) !important;
+  color: var(--ad-text-dim) !important;
+}
+
+/* ── List groups / well / jumbotron ─────────────────────── */
+html:not(.atcoder-dark-off) .list-group-item {
+  background-color: var(--ad-bg-elevated) !important;
+  border-color: var(--ad-border) !important;
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .list-group-item:hover {
+  background-color: var(--ad-bg-muted) !important;
+}
+
+html:not(.atcoder-dark-off) .list-group-item.active,
+html:not(.atcoder-dark-off) .list-group-item.active:hover {
+  background-color: #1f6feb !important;
+  border-color: #1f6feb !important;
+  color: #fff !important;
+}
+
+html:not(.atcoder-dark-off) .well,
+html:not(.atcoder-dark-off) .well-sm,
+html:not(.atcoder-dark-off) .well-lg {
+  background-color: var(--ad-bg-soft) !important;
+  border-color: var(--ad-border) !important;
+  color: var(--ad-text) !important;
+  box-shadow: none !important;
+}
+
+html:not(.atcoder-dark-off) .jumbotron {
+  background-color: var(--ad-bg-soft) !important;
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .insert-participant-box {
+  background-color: var(--ad-bg-soft) !important;
+}
+
+html:not(.atcoder-dark-off) details {
+  border-color: var(--ad-border) !important;
+  background-color: var(--ad-bg-soft) !important;
+}
+
+/* ── Blockquotes / breadcrumb ───────────────────────────── */
+html:not(.atcoder-dark-off) blockquote {
+  border-left-color: var(--ad-border) !important;
+  color: var(--ad-text-muted) !important;
+}
+
+html:not(.atcoder-dark-off) .breadcrumb {
+  background-color: var(--ad-bg-soft) !important;
+}
+
+html:not(.atcoder-dark-off) .breadcrumb > .active {
+  color: var(--ad-text-muted) !important;
+}
+
+/* ── Progress bars ──────────────────────────────────────── */
+html:not(.atcoder-dark-off) .progress {
+  background-color: var(--ad-bg-muted) !important;
+}
+
+/* ── Footer & misc chrome ───────────────────────────────── */
+html:not(.atcoder-dark-off) footer a,
+html:not(.atcoder-dark-off) footer a:hover {
+  color: var(--ad-text-muted) !important;
+}
+
+html:not(.atcoder-dark-off) #scroll-page-top {
+  background-color: #484f58 !important;
+  color: #fff !important;
+}
+
+html:not(.atcoder-dark-off) #copyright {
+  color: var(--ad-text-dim) !important;
+}
+
+/* Contest calendar notice (inline light styles on tasks page) */
+html:not(.atcoder-dark-off) .contest-calendar-notice {
+  background: linear-gradient(135deg, #161b22 0%, #0d1b2a 100%) !important;
+  border-color: var(--ad-border) !important;
+  box-shadow: 0 10px 30px var(--ad-shadow) !important;
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .contest-calendar-label {
+  background: #1f3a5f !important;
+  color: #79c0ff !important;
+}
+
+html:not(.atcoder-dark-off) .contest-calendar-header h2 {
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .contest-calendar-lead {
+  color: #c9d1d9 !important;
+}
+
+html:not(.atcoder-dark-off) .contest-calendar-description {
+  color: var(--ad-text-muted) !important;
+}
+
+html:not(.atcoder-dark-off) .contest-calendar-links a {
+  border-color: var(--ad-border) !important;
+  background: rgba(22, 27, 34, 0.9) !important;
+}
+
+html:not(.atcoder-dark-off) .contest-calendar-links a:hover {
+  border-color: #388bfd !important;
+  box-shadow: 0 8px 20px rgba(56, 139, 253, 0.12) !important;
+}
+
+html:not(.atcoder-dark-off) .contest-calendar-links span {
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .contest-calendar-links small {
+  color: var(--ad-text-muted) !important;
+}
+
+/* Spoiler */
+html:not(.atcoder-dark-off) .spoiler:not(:hover) {
+  background-color: #484f58 !important;
+  color: #484f58 !important;
+}
+
+/* Nav pills */
+html:not(.atcoder-dark-off) .nav-pills > li > a {
+  color: var(--ad-text-muted) !important;
+}
+
+html:not(.atcoder-dark-off) .nav-pills > li.active > a,
+html:not(.atcoder-dark-off) .nav-pills > li.active > a:hover,
+html:not(.atcoder-dark-off) .nav-pills > li.active > a:focus {
+  background-color: #1f6feb !important;
+  color: #fff !important;
+}
+
+/* Tooltip / popover */
+html:not(.atcoder-dark-off) .tooltip-inner {
+  background-color: #30363d !important;
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .popover {
+  background-color: var(--ad-bg-elevated) !important;
+  border-color: var(--ad-border) !important;
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .popover-title {
+  background-color: var(--ad-bg-soft) !important;
+  border-bottom-color: var(--ad-border) !important;
+  color: var(--ad-text) !important;
+}
+
+/* Home page / ranking tables extras */
+html:not(.atcoder-dark-off) .thumbnail {
+  background-color: var(--ad-bg-elevated) !important;
+  border-color: var(--ad-border) !important;
+}
+
+html:not(.atcoder-dark-off) .img-thumbnail {
+  background-color: var(--ad-bg-elevated) !important;
+  border-color: var(--ad-border) !important;
+}
+
+/* Submission verdict colors stay vivid */
+html:not(.atcoder-dark-off) .label-success,
+html:not(.atcoder-dark-off) span[class*="label"].label-success {
+  background-color: #238636 !important;
+}
+
+/* Diff / problem statement sample I/O */
+html:not(.atcoder-dark-off) .part > section,
+html:not(.atcoder-dark-off) #task-statement,
+html:not(.atcoder-dark-off) #task-statement section {
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) #task-statement h3 {
+  color: var(--ad-text) !important;
+  border-bottom-color: var(--ad-border) !important;
+}
+
+/* Graph / SVG text (ratings etc.) */
+html:not(.atcoder-dark-off) svg text {
+  fill: var(--ad-text-muted) !important;
+}
+
+/* Rating canvases — CreateJS colors patched in page-theme.js */
+html:not(.atcoder-dark-off) #ratingGraph,
+html:not(.atcoder-dark-off) #ratingStatus,
+html:not(.atcoder-dark-off) #ratingDistributionGraph {
+  background-color: transparent !important;
+  border-radius: 8px;
+}
+
+/* Floating theme toggle (content script injects #atcoder-dark-fab) */
+#atcoder-dark-fab {
+  position: fixed !important;
+  right: 16px !important;
+  bottom: 100px !important;
+  z-index: 2147483646 !important;
+  width: 48px !important;
+  height: 48px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  border: 1px solid #30363d !important;
+  background: #161b22 !important;
+  color: #e6edf3 !important;
+  font-size: 22px !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.55) !important;
+  display: grid !important;
+  place-items: center !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+#atcoder-dark-fab.is-light {
+  background: #ffffff !important;
+  color: #1f2328 !important;
+  border-color: #d0d7de !important;
+}
+
+html.atcoder-dark-off #atcoder-dark-fab {
+  background: #ffffff !important;
+  color: #1f2328 !important;
+  border-color: #d0d7de !important;
+}
+
+
+/* Scrollbars (Chromium) */
+html:not(.atcoder-dark-off) * {
+  scrollbar-width: thin;
+  scrollbar-color: #484f58 var(--ad-bg);
+}
+
+html:not(.atcoder-dark-off) ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+html:not(.atcoder-dark-off) ::-webkit-scrollbar-track {
+  background: var(--ad-bg);
+}
+
+html:not(.atcoder-dark-off) ::-webkit-scrollbar-thumb {
+  background: #484f58;
+  border-radius: 5px;
+}
+
+html:not(.atcoder-dark-off) ::-webkit-scrollbar-thumb:hover {
+  background: #6e7681;
+}
+
+/* ── Select2 (submit / submissions filters) ─────────────── */
+html:not(.atcoder-dark-off) .select2-container--default .select2-selection--single,
+html:not(.atcoder-dark-off) .select2-container--default .select2-selection--multiple,
+html:not(.atcoder-dark-off) span.select2-selection,
+html:not(.atcoder-dark-off) span.select2-selection--single {
+  background-color: var(--ad-input-bg) !important;
+  border-color: var(--ad-border) !important;
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .select2-container--default .select2-selection--single .select2-selection__rendered,
+html:not(.atcoder-dark-off) .select2-selection__rendered {
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .select2-container--default .select2-selection--single .select2-selection__arrow b {
+  border-color: var(--ad-text-muted) transparent transparent transparent !important;
+}
+
+html:not(.atcoder-dark-off) .select2-dropdown,
+html:not(.atcoder-dark-off) .select2-container--open .select2-dropdown {
+  background-color: var(--ad-bg-elevated) !important;
+  border-color: var(--ad-border) !important;
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .select2-container--default .select2-search--dropdown .select2-search__field {
+  background-color: var(--ad-input-bg) !important;
+  border-color: var(--ad-border) !important;
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .select2-container--default .select2-results__option {
+  background-color: var(--ad-bg-elevated) !important;
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .select2-container--default .select2-results__option--highlighted[aria-selected],
+html:not(.atcoder-dark-off) .select2-container--default .select2-results__option--highlighted {
+  background-color: #1f6feb !important;
+  color: #fff !important;
+}
+
+html:not(.atcoder-dark-off) .select2-container--default .select2-results__option[aria-selected="true"] {
+  background-color: var(--ad-bg-muted) !important;
+  color: var(--ad-text) !important;
+}
+
+/* ── Submissions Prev/Next plain links (white pills) ─────── */
+html:not(.atcoder-dark-off) .text-center > a:not(.btn):not(.btn-text),
+html:not(.atcoder-dark-off) ul.pager > li > a,
+html:not(.atcoder-dark-off) .pager > li > a,
+html:not(.atcoder-dark-off) .pager > li > span {
+  background-color: var(--ad-bg-muted) !important;
+  border: 1px solid var(--ad-border) !important;
+  color: var(--ad-text) !important;
+  border-radius: 999px !important;
+}
+
+html:not(.atcoder-dark-off) .text-center > a:not(.btn):not(.btn-text):hover,
+html:not(.atcoder-dark-off) ul.pager > li > a:hover,
+html:not(.atcoder-dark-off) .pager > li > a:hover {
+  background-color: #30363d !important;
+  color: #fff !important;
+}
+
+/* ── Highcharts tooltips / rating graph ─────────────────── */
+html:not(.atcoder-dark-off) .highcharts-background {
+  fill: var(--ad-bg-elevated) !important;
+}
+
+html:not(.atcoder-dark-off) .highcharts-tooltip-box {
+  fill: var(--ad-bg-soft) !important;
+  stroke: var(--ad-border) !important;
+}
+
+html:not(.atcoder-dark-off) .highcharts-tooltip text,
+html:not(.atcoder-dark-off) .highcharts-tooltip span {
+  fill: var(--ad-text) !important;
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .highcharts-axis-labels text,
+html:not(.atcoder-dark-off) .highcharts-xaxis-labels text,
+html:not(.atcoder-dark-off) .highcharts-yaxis-labels text {
+  fill: var(--ad-text-muted) !important;
+}
+
+/* ── Fixed server timer (was light digitalclock.png) ─────── */
+html:not(.atcoder-dark-off) #fixed-server-timer {
+  background-image: none !important;
+  background-color: rgba(1, 4, 9, 0.88) !important;
+  border: 1px solid #30363d !important;
+  border-radius: 10px !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45) !important;
+  color: #e6edf3 !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  line-height: 1.35 !important;
+}
+
+html:not(.atcoder-dark-off) #fixed-server-timer:hover {
+  background-color: rgba(13, 17, 23, 0.95) !important;
+  border-color: #484f58 !important;
+}
+
+/* ── Cloudflare Turnstile host wrapper (iframe stays light) */
+html:not(.atcoder-dark-off) .cf-turnstile,
+html:not(.atcoder-dark-off) iframe[src*="challenges.cloudflare.com"] {
+  border-radius: 6px;
+  opacity: 0.95;
+}
+
+/* ── Bootstrap nav-pills (Standings / Algorithm tabs) ───── */
+html:not(.atcoder-dark-off) .nav-pills > li > a {
+  color: var(--ad-text-muted) !important;
+  background: transparent !important;
+}
+
+html:not(.atcoder-dark-off) .nav-pills > li.active > a,
+html:not(.atcoder-dark-off) .nav-pills > li.active > a:hover,
+html:not(.atcoder-dark-off) .nav-pills > li.active > a:focus {
+  background-color: #1f6feb !important;
+  color: #fff !important;
+}
+
+/* ── Help text / muted ──────────────────────────────────── */
+html:not(.atcoder-dark-off) .help-block,
+html:not(.atcoder-dark-off) .text-muted {
+  color: var(--ad-text-muted) !important;
+}
+
+/* (prettify + ACE token colors defined in Code section above) */
+

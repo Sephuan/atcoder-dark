@@ -1,0 +1,27 @@
+{
+  "name": "atcoder-dark",
+  "version": "1.1.0",
+  "private": true,
+  "description": "Chrome dark theme extension for AtCoder",
+  "scripts": {
+    "pack": "bash scripts/pack-extension.sh",
+    "login": "node scripts/login.mjs",
+    "sync-profile": "node scripts/sync-chrome-profile.mjs",
+    "preview": "node scripts/preview.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Sephuan/atcoder-dark.git"
+  },
+  "keywords": [
+    "atcoder",
+    "chrome-extension",
+    "dark-theme",
+    "competitive-programming"
+  ],
+  "author": "Sephuan",
+  "license": "MIT",
+  "devDependencies": {
+    "puppeteer-core": "^24.43.1"
+  }
+}

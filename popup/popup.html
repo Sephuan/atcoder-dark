@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AtCoder Dark</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo" aria-hidden="true">A</div>
+      <div>
+        <h1 id="title">AtCoder Dark</h1>
+        <p id="sub" class="sub"></p>
+      </div>
+    </header>
+
+    <div class="seg" role="group" id="theme-group" aria-label="Theme">
+      <button type="button" id="btn-dark" class="seg-btn" data-mode="dark"></button>
+      <button type="button" id="btn-light" class="seg-btn" data-mode="light"></button>
+    </div>
+
+    <p id="status" class="status" role="status"></p>
+    <p id="hint" class="hint"></p>
+
+    <section class="lang-block">
+      <div id="lang-label" class="lang-label"></div>
+      <div class="seg seg-sm" role="group" id="lang-group" aria-label="Language">
+        <button type="button" id="lang-auto" class="seg-btn" data-locale="auto"></button>
+        <button type="button" id="lang-zh" class="seg-btn" data-locale="zh_CN"></button>
+        <button type="button" id="lang-en" class="seg-btn" data-locale="en"></button>
+      </div>
+    </section>
+  </main>
+  <script src="../lib/i18n.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

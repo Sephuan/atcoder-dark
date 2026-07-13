@@ -1,0 +1,15 @@
+/* Paint-blocking shell: applied before any page CSS (no class gate). */
+html {
+  color-scheme: dark !important;
+  background-color: #0d1117 !important;
+}
+
+html.atcoder-dark-off {
+  color-scheme: light !important;
+  background-color: #fff !important;
+}
+
+html:not(.atcoder-dark-off) body {
+  background-color: #0d1117 !important;
+  color: #e6edf3 !important;
+}
