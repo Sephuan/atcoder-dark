@@ -25,7 +25,7 @@
   "content_scripts": [
     {
       "matches": ["https://atcoder.jp/*", "https://*.atcoder.jp/*"],
-      "js": ["lib/i18n.js", "content/content.js"],
+      "js": ["content/page-theme.js", "lib/i18n.js", "content/content.js"],
       "css": ["styles/preload.css", "styles/dark.css"],
       "run_at": "document_start"
     }
