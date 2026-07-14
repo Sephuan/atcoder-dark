@@ -1066,16 +1066,24 @@ html.atcoder-dark-off tr[style*="background-color:#d4edc9"] {
   background-color: rgb(212, 237, 201) !important;
 }
 
-/* DARK mode: bright semi-transparent green — text stays readable on top */
+/* DARK mode: bright semi-transparent verdict row backgrounds so text stays
+   readable on top. AtCoder Extension uses #d4edc9 for AC and #ffe3e3 for
+   everything else (WA/TLE/MLE/RE all lumped together). WJ waits (no color). */
 html:not(.atcoder-dark-off) body tr[style*="background-color: rgb(212, 237, 201)"],
 html:not(.atcoder-dark-off) body tr[style*="background-color:rgb(212, 237, 201)"],
-html:not(.atcoder-dark-off) body tr[style*="background-color: rgb(220, 240, 210)"] {
+html:not(.atcoder-dark-off) body tr[style*="background-color: rgb(220, 240, 210)"],
+html:not(.atcoder-dark-off) body tr[style*="background-color: #d4edc9"],
+html:not(.atcoder-dark-off) body tr[style*="background-color:#d4edc9"] {
   background-color: rgba(34, 197, 94, 0.30) !important;
   background-image: none !important;
 }
-/* WA row */
-html:not(.atcoder-dark-off) body tr[style*="background-color: rgb(255, 200, 200)"],
-html:not(.atcoder-dark-off) body tr[style*="background-color: rgb(248, 215, 218)"] {
+/* WA/TLE/MLE/RE row (Extension lumps all non-AC non-WJ as #ffe3e3) */
+html:not(.atcoder-dark-off) body tr[style*="background-color: rgb(255, 227, 227)"],
+html:not(.atcoder-dark-off) body tr[style*="background-color:rgb(255, 227, 227)"],
+html:not(.atcoder-dark-off) body tr[style*="background-color: #ffe3e3"],
+html:not(.atcoder-dark-off) body tr[style*="background-color: #ffe3e3"],
+html:not(.atcoder-dark-off) body tr[style*="background-color:#ffe3e3"],
+html:not(.atcoder-dark-off) body tr[style*="background-color: rgb(255, 200, 200)"] {
   background-color: rgba(239, 68, 68, 0.30) !important;
   background-image: none !important;
 }

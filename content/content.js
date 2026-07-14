@@ -52,12 +52,13 @@
       const bg = tr.style.backgroundColor || "";
 
       if (isDark()) {
-        // AC / solved — bright semi-transparent green, text stays on top
+        // AC / solved — bright semi-transparent green. Extension uses #d4edc9
         if (/212,\s*237,\s*201/.test(bg) || /220,\s*240,\s*210/.test(bg) || /#d4edc9/i.test(bg)) {
           tr.style.setProperty("background-color", "rgba(34, 197, 94, 0.30)", "important");
         }
-        // WA / wrong — bright semi-transparent red, text stays on top
-        else if (/255,\s*200,\s*200/.test(bg) || /#f8d7da/i.test(bg) || /#fcd/i.test(bg) || /#f5c6cb/i.test(bg)) {
+        // WA / TLE / MLE / RE / non-AC non-WJ — Extension lumps these as #ffe3e3.
+        // Same treatment so any failed submission row is visibly marked.
+        else if (/255,\s*227,\s*227/.test(bg) || /#ffe3e3/i.test(bg) || /#fcd/i.test(bg) || /255,\s*200,\s*200/.test(bg) || /#f8d7da/i.test(bg)) {
           tr.style.setProperty("background-color", "rgba(239, 68, 68, 0.30)", "important");
         }
       } else {
