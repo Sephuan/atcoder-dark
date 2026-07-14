@@ -107,24 +107,6 @@
     } catch (_) {
       /* ignore */
     }
-
-    // Intercept later assignments: diff_text.color = '#888', rating_text.color = rank
-    try {
-      const proto = Orig.prototype;
-      Object.defineProperty(proto, "color", {
-        configurable: true,
-        enumerable: true,
-        get() {
-          return this.__adColor;
-        },
-        set(v) {
-          this.__adColor = mapText(v == null ? "#000" : v);
-        },
-      });
-    } catch (_) {
-      /* ignore if non-configurable */
-    }
-
     cj.Text = Text;
   }
 
@@ -198,7 +180,7 @@
     ) {
       clearInterval(iv);
     }
-  }, 10);
+  }, 200);
 
   window.addEventListener("load", () => {
     patchCreatejs(window.createjs);
