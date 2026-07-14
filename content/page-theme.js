@@ -107,6 +107,24 @@
     } catch (_) {
       /* ignore */
     }
+
+    // Intercept later assignments: diff_text.color = '#888', rating_text.color = rank
+    try {
+      const proto = Orig.prototype;
+      Object.defineProperty(proto, "color", {
+        configurable: true,
+        enumerable: true,
+        get() {
+          return this.__adColor;
+        },
+        set(v) {
+          this.__adColor = mapText(v == null ? "#000" : v);
+        },
+      });
+    } catch (_) {
+      /* ignore if non-configurable */
+    }
+
     cj.Text = Text;
   }
 
@@ -150,13 +168,44 @@
     return ok;
   }
 
-  // Patch at window.load — createjs is guaranteed ready
-  function doPatch() {
-    var cj = window.createjs;
-    if (cj) patchCreatejs(cj);
+  let _cj = window.createjs;
+  if (_cj) patchCreatejs(_cj);
+  try {
+    Object.defineProperty(window, "createjs", {
+      configurable: true,
+      enumerable: true,
+      get() {
+        return _cj;
+      },
+      set(v) {
+        _cj = v;
+        patchCreatejs(v);
+      },
+    });
+  } catch (_) {
+    /* ignore */
   }
-  if (document.readyState === "complete") doPatch();
-  else window.addEventListener("load", doPatch, { once: true });
+
+  const iv = setInterval(() => {
+    const cj = window.createjs;
+    if (!cj) return;
+    patchCreatejs(cj);
+    if (
+      cj.Text &&
+      cj.Text.__adWrapped &&
+      cj.Graphics &&
+      cj.Graphics.prototype.__adWrapped
+    ) {
+      clearInterval(iv);
+    }
+  }, 10);
+
+  window.addEventListener("load", () => {
+    patchCreatejs(window.createjs);
+    setTimeout(() => patchCreatejs(window.createjs), 0);
+    setTimeout(() => patchCreatejs(window.createjs), 50);
+  });
+  setTimeout(() => clearInterval(iv), 20000);
 
   // ── Floating theme toggle (always present in this page context) ──
   function setDark(enabled) {
