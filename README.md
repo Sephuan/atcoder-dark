@@ -14,6 +14,7 @@ Chrome extension that applies a modern **dark theme** to [AtCoder](https://atcod
 - **Bilingual UI**: English & 简体中文
 - Preserves rank colors and AC/WA verdict colors
 - Better contrast for ACE code view and rating charts
+- **Compatible with AtCoder Extension** — row verdict backgrounds (#d4edc9 AC / #ffe3e3 non-AC) are remapped to semi-transparent dark-mode colors; rating chart (CreateJS) text and rank colors are patched for readability
 - FOUC-free: first paint is already dark
 - Minimal permissions: `storage` + `atcoder.jp` only
 
