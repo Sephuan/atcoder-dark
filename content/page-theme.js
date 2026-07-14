@@ -150,13 +150,33 @@
     return ok;
   }
 
-  // Poll until createjs.Text AND createjs.Graphics are both available
-  if (!patchCreatejs(window.createjs)) {
-    var iv = setInterval(function () {
-      if (patchCreatejs(window.createjs)) clearInterval(iv);
-    }, 100);
-    setTimeout(function () { clearInterval(iv); }, 30000);
-  }
+  let _cj = window.createjs;
+  if (_cj) patchCreatejs(_cj);
+  try {
+    Object.defineProperty(window, "createjs", {
+      configurable: true,
+      enumerable: true,
+      get() { return _cj; },
+      set(v) { _cj = v; patchCreatejs(v); },
+    });
+  } catch (_) {}
+
+  const iv = setInterval(() => {
+    const cj = window.createjs;
+    if (!cj) return;
+    patchCreatejs(cj);
+    if (cj.Text && cj.Text.__adWrapped && cj.Graphics && cj.Graphics.prototype.__adWrapped) {
+      clearInterval(iv);
+    }
+  }, 50);
+
+  window.addEventListener("load", () => {
+    patchCreatejs(window.createjs);
+    setTimeout(() => patchCreatejs(window.createjs), 0);
+    setTimeout(() => patchCreatejs(window.createjs), 200);
+    setTimeout(() => patchCreatejs(window.createjs), 1000);
+  });
+  setTimeout(() => clearInterval(iv), 30000);
 
   window.addEventListener("load", () => {
     patchCreatejs(window.createjs);
