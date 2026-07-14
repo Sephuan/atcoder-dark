@@ -1272,6 +1272,12 @@ html:not(.atcoder-dark-off) #ratingDistributionGraph {
   border-radius: 8px;
 }
 
+/* Verdict badge (✓ AC / ✗ WA) added to first cell of each problem row */
+.atcoder-dark-verdict-badge {
+  font-family: system-ui, -apple-system, sans-serif;
+  user-select: none;
+}
+
 /* Floating theme toggle (content script injects #atcoder-dark-fab) */
 #atcoder-dark-fab {
   position: fixed !important;

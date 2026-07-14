@@ -38,6 +38,8 @@
     setTimeout(forceVerdictRows, 50);
     setTimeout(forceVerdictRows, 300);
     setTimeout(forceVerdictRows, 1000);
+    setTimeout(addMarkers, 600);
+    setTimeout(addMarkers, 2000);
   }
 
   function isDark() {
@@ -45,9 +47,91 @@
   }
 
   /* ------------------------------------------------------------------ *
-   * Force verdict row backgrounds (beat inline styles from extensions) *
+   * Restore verdict markers (Companion markers are wiped by OnCoder      *
+   * Extension's innerHTML rebuild). Fetch our own submissions and       *
+   * prepend a small badge to each problem row's first cell.            *
    * ------------------------------------------------------------------ */
-  function forceVerdictRows() {
+  const verdictCache = new Map();
+
+  function extractProblemLetter(href) {
+    const m = href && href.match(/tasks\/abc\d+_[a-z]/i);
+    return m ? m[0].split("_")[1].toUpperCase() : null;
+  }
+
+  async function fetchVerdicts() {
+    if (!location.pathname.includes("/contests/")) return;
+    const base = location.href.split("/tasks")[0].split("?")[0];
+    const subUrl = base + "/submissions/me";
+    const best = new Map(); // problem letter -> best verdict
+    const order = ["AC", "WA", "TLE", "MLE", "RE", "CE", "WJ", "WR", "OLE", "IE"];
+    try {
+      for (let page = 1; page <= 20; page++) {
+        const resp = await fetch(`${subUrl}?page=${page}`, { credentials: "include" });
+        if (!resp.ok) break;
+        const html = await resp.text();
+        const doc = new DOMParser().parseFromString(html, "text/html");
+        const trs = doc.querySelectorAll("tbody tr");
+        if (!trs.length) break;
+        for (const tr of trs) {
+          const tds = tr.querySelectorAll("td");
+          if (tds.length < 7) continue;
+          const probHref = tds[1] && tds[1].querySelector("a") && tds[1].querySelector("a").getAttribute("href");
+          const letter = extractProblemLetter(probHref);
+          const verdict = (tds[6] && tds[6].textContent.trim()) || "";
+          if (!letter || !verdict) continue;
+          const prev = best.get(letter);
+          if (!prev || order.indexOf(verdict) < order.indexOf(prev)) {
+            best.set(letter, verdict);
+          }
+        }
+        // stop if last seen
+        if (trs.length < 20) break;
+      }
+    } catch (_) {
+      /* ignore */
+    }
+    verdictCache.clear();
+    best.forEach((v, k) => verdictCache.set(k, v));
+  }
+
+  function badgeColor(verdict) {
+    if (verdict === "AC") return isDark() ? "#22c55e" : "#15803d";
+    return isDark() ? "#ef4444" : "#991b1b";
+  }
+
+  function addMarkers() {
+    if (!document.querySelector("table")) return;
+    document.querySelectorAll("tbody tr").forEach((tr) => {
+      const firstCell = tr.querySelector("td:first-child");
+      if (!firstCell) return;
+      const link = firstCell.querySelector("a");
+      const letter = extractProblemLetter(link && link.getAttribute("href"));
+      if (!letter) return;
+      // Remove any previous badge we added (idempotent)
+      firstCell.querySelector(".atcoder-dark-verdict-badge")?.remove();
+      const verdict = verdictCache.get(letter);
+      if (!verdict) return;
+      if (verdict === "WJ" || verdict === "WR") return; // pending, no badge
+      const isAc = verdict === "AC";
+      const badge = document.createElement("span");
+      badge.className = "atcoder-dark-verdict-badge";
+      badge.textContent = isAc ? "✓" : "✗";
+      badge.title = verdict;
+      Object.assign(badge.style, {
+        display: "inline-block",
+        marginRight: "4px",
+        fontSize: "14px",
+        fontWeight: "700",
+        lineHeight: "1",
+        color: badgeColor(verdict),
+        textShadow: isDark() ? "0 0 4px rgba(0,0,0,0.6)" : "none",
+        verticalAlign: "middle",
+      });
+      firstCell.prepend(badge);
+    });
+  }
+
+  // Refresh markers on poll too
     document.querySelectorAll("tbody tr").forEach((tr) => {
       const bg = tr.style.backgroundColor || "";
 
@@ -77,6 +161,7 @@
   let pollCount = 0;
   const pollHandle = setInterval(() => {
     forceVerdictRows();
+    addMarkers();
     pollCount++;
     // Stop polling after ~15s; rely on observer afterwards
     if (pollCount > 30) clearInterval(pollHandle);
@@ -102,6 +187,13 @@
     startRowObserver();
   }
   window.addEventListener("load", startRowObserver);
+
+  // Fetch verdicts then inject markers (after OnCoder Extension rebuilds table)
+  fetchVerdicts().then(() => {
+    setTimeout(addMarkers, 800);
+    setTimeout(addMarkers, 3000);
+    setTimeout(addMarkers, 8000);
+  });
 
   // ── Floating toggle (content-script world shares page DOM) ──
   let fab = null;
