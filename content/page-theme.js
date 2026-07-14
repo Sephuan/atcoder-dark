@@ -150,37 +150,13 @@
     return ok;
   }
 
-  let _cj = window.createjs;
-  if (_cj) patchCreatejs(_cj);
-  try {
-    Object.defineProperty(window, "createjs", {
-      configurable: true,
-      enumerable: true,
-      get() {
-        return _cj;
-      },
-      set(v) {
-        _cj = v;
-        patchCreatejs(v);
-      },
-    });
-  } catch (_) {
-    /* ignore */
+  // Poll until createjs.Text AND createjs.Graphics are both available
+  if (!patchCreatejs(window.createjs)) {
+    var iv = setInterval(function () {
+      if (patchCreatejs(window.createjs)) clearInterval(iv);
+    }, 100);
+    setTimeout(function () { clearInterval(iv); }, 30000);
   }
-
-  const iv = setInterval(() => {
-    const cj = window.createjs;
-    if (!cj) return;
-    patchCreatejs(cj);
-    if (
-      cj.Text &&
-      cj.Text.__adWrapped &&
-      cj.Graphics &&
-      cj.Graphics.prototype.__adWrapped
-    ) {
-      clearInterval(iv);
-    }
-  }, 200);
 
   window.addEventListener("load", () => {
     patchCreatejs(window.createjs);
