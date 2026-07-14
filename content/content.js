@@ -46,7 +46,11 @@
   setTimeout(fixRows, 1500);
   setTimeout(fixRows, 4000);
 
-  // Floating toggle
+  function toggle() {
+    var next = isDark() ? false : true; // next state
+    setEnabled(next);
+    try { chrome.storage.sync.set({ enabled: next }); } catch(e) {}
+  }
   function refreshFab() {
     var fab = document.getElementById(FAB_ID);
     if (!fab) return;
@@ -56,17 +60,14 @@
     if (document.getElementById(FAB_ID)) { refreshFab(); return; }
     var fab = document.createElement("button");
     fab.id = FAB_ID; fab.type = "button"; fab.textContent = "☀";
-    fab.addEventListener("click", function() {
-      setEnabled(!isDark());
-      try { chrome.storage.sync.set({ enabled: !isDark() }); } catch(e) {}
-    });
+    fab.addEventListener("click", toggle);
     (document.body || document.documentElement).appendChild(fab);
     refreshFab();
   }
 
   setEnabled(true);
   try { chrome.storage.sync.get({ enabled: true }, function(d) { setEnabled(d.enabled !== false); }); } catch(e) {}
-  try { chrome.storage.onChanged.addListener(function(c) { if (c.enabled) setEnabled(c.enabled.newValue !== false); }); } catch(e) {}
+  try { chrome.storage.onChanged.addListener(function(c) { if (c.enabled) refreshFab(); }); } catch(e) {}
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mountFab);
   else setTimeout(mountFab, 200);
