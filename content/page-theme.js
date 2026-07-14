@@ -150,21 +150,13 @@
     return ok;
   }
 
-  // Patch at window.load — createjs is guaranteed ready (rating-graph and
-  // distribution-graph both use $(window).load to start drawing).
+  // Patch at window.load — createjs is guaranteed ready
   function doPatch() {
     var cj = window.createjs;
     if (cj) patchCreatejs(cj);
   }
   if (document.readyState === "complete") doPatch();
   else window.addEventListener("load", doPatch, { once: true });
-
-  window.addEventListener("load", () => {
-    patchCreatejs(window.createjs);
-    setTimeout(() => patchCreatejs(window.createjs), 0);
-    setTimeout(() => patchCreatejs(window.createjs), 50);
-  });
-  setTimeout(() => clearInterval(iv), 20000);
 
   // ── Floating theme toggle (always present in this page context) ──
   function setDark(enabled) {
