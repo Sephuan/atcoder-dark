@@ -34,11 +34,31 @@
       /* ignore */
     }
     refreshFab();
+    fixRows();
   }
 
   function isDark() {
     return !html.classList.contains(OFF);
   }
+
+  // AtCoder Extension colors rows: #d4edc9 = AC, #ffe3e3 = WA/TLE/MLE/RE
+  function fixRows() {
+    if (!isDark()) return;
+    var trs = document.querySelectorAll("tbody tr");
+    for (var i = 0; i < trs.length; i++) {
+      var bg = trs[i].style.backgroundColor || "";
+      if (/212,\s*237,\s*201|#d4edc9/.test(bg)) {
+        trs[i].style.setProperty("background-color", "rgba(34, 197, 94, 0.30)", "important");
+      } else if (/255,\s*227,\s*227|#ffe3e3|255,\s*200,\s*200/.test(bg)) {
+        trs[i].style.setProperty("background-color", "rgba(239, 68, 68, 0.30)", "important");
+      }
+    }
+  }
+
+  // Run a few times to catch async coloring from extensions
+  setTimeout(fixRows, 500);
+  setTimeout(fixRows, 2000);
+  setTimeout(fixRows, 5000);
 
   // ── Floating toggle (content-script world shares page DOM) ──
   let fab = null;
