@@ -4,7 +4,6 @@
   const html = document.documentElement;
 
   function isDark() { return !html.classList.contains(OFF); }
-
   function paintShell(on) {
     if (on) {
       html.style.setProperty("background-color", "#0d1117", "important");
@@ -14,7 +13,6 @@
       html.style.removeProperty("color-scheme");
     }
   }
-
   function setEnabled(on) {
     html.classList.toggle(OFF, !on);
     paintShell(on);
@@ -22,32 +20,22 @@
     fixRows();
   }
 
-  // AtCoder Extension colors rows: #d4edc9 = AC, #ffe3e3 = WA/TLE/MLE/RE
+  // AtCoder Extension: #d4edc9 = AC, #ffe3e3 = WA/TLE/MLE/RE
   function fixRows() {
+    if (!isDark()) return;
     var trs = document.querySelectorAll("tbody tr");
     for (var i = 0; i < trs.length; i++) {
       var bg = trs[i].style.backgroundColor || "";
-      if (!isDark()) {
-        // Restore original light colors
-        if (/34,\s*197,\s*94/.test(bg)) trs[i].style.setProperty("background-color", "rgb(212, 237, 201)", "important");
-        else if (/239,\s*68,\s*68/.test(bg)) trs[i].style.setProperty("background-color", "rgb(255, 227, 227)", "important");
-        continue;
-      }
       if (/212,\s*237,\s*201|#d4edc9/.test(bg)) {
         trs[i].style.setProperty("background-color", "rgba(34, 197, 94, 0.30)", "important");
-      } else if (/255,\s*227,\s*227|#ffe3e3|255,\s*200,\s*200/.test(bg)) {
+      } else if (/255,\s*227,\s*227|#ffe3e3/.test(bg)) {
         trs[i].style.setProperty("background-color", "rgba(239, 68, 68, 0.30)", "important");
       }
     }
   }
 
-  // Run a few times to catch async coloring from AtCoder Extension
-  setTimeout(fixRows, 500);
-  setTimeout(fixRows, 1500);
-  setTimeout(fixRows, 4000);
-
   function toggle() {
-    var next = isDark() ? false : true; // next state
+    var next = !isDark();
     setEnabled(next);
     try { chrome.storage.sync.set({ enabled: next }); } catch(e) {}
   }
@@ -67,7 +55,11 @@
 
   setEnabled(true);
   try { chrome.storage.sync.get({ enabled: true }, function(d) { setEnabled(d.enabled !== false); }); } catch(e) {}
-  try { chrome.storage.onChanged.addListener(function(c) { if (c.enabled) refreshFab(); }); } catch(e) {}
+
+  // deferred fixes
+  setTimeout(fixRows, 500);
+  setTimeout(fixRows, 2000);
+  setTimeout(fixRows, 5000);
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mountFab);
   else setTimeout(mountFab, 200);
