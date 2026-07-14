@@ -150,33 +150,14 @@
     return ok;
   }
 
-  let _cj = window.createjs;
-  if (_cj) patchCreatejs(_cj);
-  try {
-    Object.defineProperty(window, "createjs", {
-      configurable: true,
-      enumerable: true,
-      get() { return _cj; },
-      set(v) { _cj = v; patchCreatejs(v); },
-    });
-  } catch (_) {}
-
-  const iv = setInterval(() => {
-    const cj = window.createjs;
-    if (!cj) return;
-    patchCreatejs(cj);
-    if (cj.Text && cj.Text.__adWrapped && cj.Graphics && cj.Graphics.prototype.__adWrapped) {
-      clearInterval(iv);
-    }
-  }, 50);
-
-  window.addEventListener("load", () => {
-    patchCreatejs(window.createjs);
-    setTimeout(() => patchCreatejs(window.createjs), 0);
-    setTimeout(() => patchCreatejs(window.createjs), 200);
-    setTimeout(() => patchCreatejs(window.createjs), 1000);
-  });
-  setTimeout(() => clearInterval(iv), 30000);
+  // Patch at window.load — createjs is guaranteed ready (rating-graph and
+  // distribution-graph both use $(window).load to start drawing).
+  function doPatch() {
+    var cj = window.createjs;
+    if (cj) patchCreatejs(cj);
+  }
+  if (document.readyState === "complete") doPatch();
+  else window.addEventListener("load", doPatch, { once: true });
 
   window.addEventListener("load", () => {
     patchCreatejs(window.createjs);
