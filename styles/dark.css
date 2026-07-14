@@ -1050,10 +1050,193 @@ html:not(.atcoder-dark-off) .img-thumbnail {
   border-color: var(--ad-border) !important;
 }
 
-/* Submission verdict colors stay vivid */
+/* =================================================================
+ * COMPANION / AtCoderExtension row-background verdicts
+ * These extensions paint the whole <tr> background to show verdict
+ * (light green = AC, light red/pink = WA, etc). Those light colors are
+ * nearly invisible on dark background — remap to dark-friendly hues.
+ * ================================================================ */
+
+/* LIGHT mode: keep original Companion light green */
+html.atcoder-dark-off tr[style*="background-color: rgb(212, 237, 201)"],
+html.atcoder-dark-off tr[style*="background-color:rgb(212, 237, 201)"],
+html.atcoder-dark-off tr[style*="background-color: rgb(220, 240, 210)"],
+html.atcoder-dark-off tr[style*="background-color: #d4edc9"],
+html.atcoder-dark-off tr[style*="background-color:#d4edc9"] {
+  background-color: rgb(212, 237, 201) !important;
+}
+
+/* DARK mode: bright semi-transparent green — text stays readable on top */
+html:not(.atcoder-dark-off) body tr[style*="background-color: rgb(212, 237, 201)"],
+html:not(.atcoder-dark-off) body tr[style*="background-color:rgb(212, 237, 201)"],
+html:not(.atcoder-dark-off) body tr[style*="background-color: rgb(220, 240, 210)"] {
+  background-color: rgba(34, 197, 94, 0.30) !important;
+  background-image: none !important;
+}
+/* WA row */
+html:not(.atcoder-dark-off) body tr[style*="background-color: rgb(255, 200, 200)"],
+html:not(.atcoder-dark-off) body tr[style*="background-color: rgb(248, 215, 218)"] {
+  background-color: rgba(239, 68, 68, 0.30) !important;
+  background-image: none !important;
+}
+
+/* LIGHT mode: keep original WA light red */
+html.atcoder-dark-off tr[style*="background-color: rgb(255, 200, 200)"],
+html.atcoder-dark-off tr[style*="background-color:rgb(255, 200, 200)"],
+html.atcoder-dark-off tr[style*="background-color: rgb(248, 215, 218)"],
+html.atcoder-dark-off tr[style*="background-color: #f8d7da"],
+html.atcoder-dark-off tr[style*="background-color:#f8d7da"],
+html.atcoder-dark-off tr[style*="background-color: rgb(250, 219, 220)"] {
+  background-color: rgb(255, 200, 200) !important;
+}
+
+/* WA / wrong answer — light red/pink → deep red */
+html:not(.atcoder-dark-off) tr[style*="background-color: rgb(255, 200, 200)"],
+html:not(.atcoder-dark-off) tr[style*="background-color:rgb(255, 200, 200)"],
+html:not(.atcoder-dark-off) tr[style*="background-color: rgb(248, 215, 218)"],
+html:not(.atcoder-dark-off) tr[style*="background-color: #f8d7da"],
+html:not(.atcoder-dark-off) tr[style*="background-color:#f8d7da"],
+html:not(.atcoder-dark-off) tr[style*="background-color: rgb(250, 219, 220)"] {
+  background-color: #3d1a1a !important;
+}
+
+/* TLE / pending — light yellow → deep amber */
+html:not(.atcoder-dark-off) tr[style*="background-color: rgb(255, 243, 205)"],
+html:not(.atcoder-dark-off) tr[style*="background-color:rgb(255, 243, 205)"],
+html:not(.atcoder-dark-off) tr[style*="background-color: #fff3cd"],
+html:not(.atcoder-dark-off) tr[style*="background-color:#fff3cd"] {
+  background-color: #3d3520 !important;
+}
+
+/* Catch-all: any row with a light/pastel background from extensions */
+html:not(.atcoder-dark-off) tbody tr[style*="background-color: rgb(2"] {
+  filter: brightness(0.4) saturate(1.6) !important;
+}
+
+/* =================================================================
+ * VERDICT COMPATIBILITY LAYER (text-based)
+ * AtCoderExtension / Companion / etc. color verdicts with their own
+ * palette (designed for light theme). Force high-contrast colors with
+ * subtle glow so AC/WA/TLE/MLE/RE/CE stay vivid on dark background.
+ * ================================================================ */
+
+/* Generic bright verdict text — text-only (no bg label) */
+html:not(.atcoder-dark-off) .verdict,
+html:not(.atcoder-dark-off) [class*="verdict-"],
+html:not(.atcoder-dark-off) .ac,
+html:not(.atcoder-dark-off) .wa,
+html:not(.atcoder-dark-off) .tle,
+html:not(.atcoder-dark-off) .mle,
+html:not(.atcoder-dark-off) .re,
+html:not(.atcoder-dark-off) .ce,
+html:not(.atcoder-dark-off) .wj,
+html:not(.atcoder-dark-off) .wr,
+html:not(.atcoder-dark-off) .ole,
+html:not(.atcoder-dark-off) .ite,
+html:not(.atcoder-dark-off) .pe,
+html:not(.atcoder-dark-off) .tie,
+html:not(.atcoder-dark-off) .approved,
+html:not(.atcoder-dark-off) .correct {
+  text-shadow: 0 0 8px currentColor;
+}
+
+/* Text color for verdict (labels / plain text) */
+html:not(.atcoder-dark-off) .ac:not(.label):not(.btn),
+html:not(.atcoder-dark-off) .approved:not(.label):not(.btn),
+html:not(.atcoder-dark-off) .correct:not(.label):not(.btn),
+html:not(.atcoder-dark-off) a.ac,
+html:not(.atcoder-dark-off) td > a[href*="submissions"]:first-child {
+  color: #4ade80 !important; /* bright AC green */
+  font-weight: 700 !important;
+  text-shadow: 0 0 10px rgba(74, 222, 128, 0.6);
+}
+
+/* WA — clearly distinct red/pink, not orange */
+html:not(.atcoder-dark-off) .wa:not(.label):not(.btn),
+html:not(.atcoder-dark-off) a.wa,
+html:not(.atcoder-dark-off) .incorrect:not(.label):not(.btn) {
+  color: #ff6b7a !important;
+  font-weight: 700 !important;
+  text-shadow: 0 0 10px rgba(255, 107, 122, 0.6);
+}
+
+/* TLE — vivid amber (NOT orange, NOT gold) */
+html:not(.atcoder-dark-off) .tle:not(.label):not(.btn),
+html:not(.atcoder-dark-off) a.tle {
+  color: #ffd166 !important;
+  font-weight: 700 !important;
+  text-shadow: 0 0 10px rgba(255, 209, 102, 0.5);
+}
+
+/* MLE — teal/cyan (distinct from TLE amber) */
+html:not(.atcoder-dark-off) .mle:not(.label):not(.btn),
+html:not(.atcoder-dark-off) a.mle {
+  color: #4dd0e1 !important;
+  font-weight: 700 !important;
+  text-shadow: 0 0 10px rgba(77, 208, 225, 0.5);
+}
+
+/* RE — magenta/purple (distinct from red/orange) */
+html:not(.atcoder-dark-off) .re:not(.label):not(.btn),
+html:not(.atcoder-dark-off) a.re {
+  color: #e879f9 !important;
+  font-weight: 700 !important;
+  text-shadow: 0 0 10px rgba(232, 121, 249, 0.5);
+}
+
+/* CE — slate gray/blue, still visible */
+html:not(.atcoder-dark-off) .ce:not(.label):not(.btn),
+html:not(.atcoder-dark-off) a.ce {
+  color: #94a3b8 !important;
+  font-weight: 700 !important;
+}
+
+/* WJ / WR / Pending — gentle yellow, lower emphasis */
+html:not(.atcoder-dark-off) .wj:not(.label):not(.btn),
+html:not(.atcoder-dark-off) a.wj,
+html:not(.atcoder-dark-off) .wr:not(.label):not(.btn),
+html:not(.atcoder-dark-off) a.wr,
+html:not(.atcoder-dark-off) .pending:not(.label):not(.btn),
+html:not(.atcoder-dark-off) .judging:not(.label):not(.btn) {
+  color: #fde68a !important;
+  font-weight: 600 !important;
+}
+
+/* AtCoder native verdict classes (keep working)  */
 html:not(.atcoder-dark-off) .label-success,
-html:not(.atcoder-dark-off) span[class*="label"].label-success {
-  background-color: #238636 !important;
+html:not(.atcoder-dark-off) .standings-ac {
+  background-color: #1f883d !important;
+  color: #fff !important;
+}
+html:not(.atcoder-dark-off) .label-danger,
+html:not(.atcoder-dark-off) .standings-wa,
+html:not(.atcoder-dark-off) span.danger {
+  background-color: #cf222e !important;
+  color: #fff !important;
+}
+html:not(.atcoder-dark-off) .label-warning {
+  background-color: #9a6700 !important;
+  color: #fff !important;
+}
+
+/* Inline-style colored verdict text (extensions often set style="color:...") */
+html:not(.atcoder-dark-off) td > a[style*="color"],
+html:not(.atcoder-dark-off) td[style*="color"] > a,
+html:not(.atcoder-dark-off) a[style*="color"]:first-child {
+  /* Keep existing color but boost readability with weight + glow */
+  font-weight: 700 !important;
+  filter: brightness(1.4) saturate(1.2) !important;
+  text-decoration: none !important;
+}
+
+/* Glow via pseudo on colored verdicts that matched common verdict terms */
+html:not(.atcoder-dark-off) a[href*="submissions"]:first-of-type {
+  font-weight: 700 !important;
+}
+
+/* Frozen (standings) keep distinct */
+html:not(.atcoder-dark-off) .standings-frozen {
+  background-color: rgba(56, 139, 253, 0.22) !important;
 }
 
 /* Diff / problem statement sample I/O */

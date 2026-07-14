@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.0 — 2026-07-13
+
+- Verdict compatibility layer: AC/WA/TLE/MLE/RE/CE/WJ high-contrast + glow
+- Bilingual UI verified across popup + floating button
+
 ## 1.1.0 — 2026-07-13
 
 - Initial public release packaging

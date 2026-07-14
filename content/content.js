@@ -34,11 +34,73 @@
       /* ignore */
     }
     refreshFab();
+    // Re-scan rows after toggling theme
+    setTimeout(forceVerdictRows, 50);
+    setTimeout(forceVerdictRows, 300);
+    setTimeout(forceVerdictRows, 1000);
   }
 
   function isDark() {
     return !html.classList.contains(OFF);
   }
+
+  /* ------------------------------------------------------------------ *
+   * Force verdict row backgrounds (beat inline styles from extensions) *
+   * ------------------------------------------------------------------ */
+  function forceVerdictRows() {
+    document.querySelectorAll("tbody tr").forEach((tr) => {
+      const bg = tr.style.backgroundColor || "";
+
+      if (isDark()) {
+        // AC / solved — bright semi-transparent green, text stays on top
+        if (/212,\s*237,\s*201/.test(bg) || /220,\s*240,\s*210/.test(bg) || /#d4edc9/i.test(bg)) {
+          tr.style.setProperty("background-color", "rgba(34, 197, 94, 0.30)", "important");
+        }
+        // WA / wrong — bright semi-transparent red, text stays on top
+        else if (/255,\s*200,\s*200/.test(bg) || /#f8d7da/i.test(bg) || /#fcd/i.test(bg) || /#f5c6cb/i.test(bg)) {
+          tr.style.setProperty("background-color", "rgba(239, 68, 68, 0.30)", "important");
+        }
+      } else {
+        // LIGHT mode — restore original light green if we ever touched it
+        if (/#22c55e/i.test(bg)) {
+          tr.style.setProperty("background-color", "rgb(212, 237, 201)", "important");
+        } else if (/#ef4444/i.test(bg)) {
+          tr.style.setProperty("background-color", "rgb(255, 200, 200)", "important");
+        }
+      }
+    });
+  }
+
+  // Poll to override Companion / AtCoderExtension inline row backgrounds.
+  // Polling beats async/timing issues from those extensions' API callbacks.
+  let pollCount = 0;
+  const pollHandle = setInterval(() => {
+    forceVerdictRows();
+    pollCount++;
+    // Stop polling after ~15s; rely on observer afterwards
+    if (pollCount > 30) clearInterval(pollHandle);
+  }, 500);
+
+  // Watch for rows added / colored by Companion / AtCoderExtension
+  const rowObserver = new MutationObserver(() => forceVerdictRows());
+
+  function startRowObserver() {
+    const tbody = document.querySelector("tbody") || document.body;
+    if (!tbody) return;
+    rowObserver.observe(tbody, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["style"],
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", startRowObserver, { once: true });
+  } else {
+    startRowObserver();
+  }
+  window.addEventListener("load", startRowObserver);
 
   // ── Floating toggle (content-script world shares page DOM) ──
   let fab = null;
@@ -83,7 +145,6 @@
       true
     );
 
-    // Prefer body; fall back to html
     const root = document.body || document.documentElement;
     root.appendChild(fab);
     refreshFab();
@@ -111,14 +172,13 @@
 
   try {
     chrome.storage.onChanged.addListener((changes, area) => {
-      if (area !== "sync" || !changes[STORAGE_KEY]) return;
-      setEnabled(changes[STORAGE_KEY].newValue !== false);
+      if (area !== "sync") return;
+      if (changes[STORAGE_KEY]) setEnabled(changes[STORAGE_KEY].newValue !== false);
     });
   } catch {
     /* ignore */
   }
 
-  // Page-world FAB (page-theme) may post theme changes
   window.addEventListener("message", (ev) => {
     if (ev.source !== window) return;
     const d = ev.data;
