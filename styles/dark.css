@@ -287,15 +287,17 @@ html:not(.atcoder-dark-off) .table-bordered > tfoot > tr > td {
   border-color: var(--ad-border) !important;
 }
 
-html:not(.atcoder-dark-off) .table-striped > tbody > tr:nth-of-type(odd) {
+/* Skip rows that already have an inline verdict background from
+   AtCoder Extension / Companion — otherwise stripe !important hides AC green. */
+html:not(.atcoder-dark-off) .table-striped > tbody > tr:nth-of-type(odd):not([style*="background-color"]) {
   background-color: var(--ad-table-stripe) !important;
 }
 
-html:not(.atcoder-dark-off) .table-striped > tbody > tr:nth-of-type(even) {
+html:not(.atcoder-dark-off) .table-striped > tbody > tr:nth-of-type(even):not([style*="background-color"]) {
   background-color: var(--ad-bg-elevated) !important;
 }
 
-html:not(.atcoder-dark-off) .table-hover > tbody > tr:hover {
+html:not(.atcoder-dark-off) .table-hover > tbody > tr:hover:not([style*="background-color"]) {
   background-color: var(--ad-table-hover) !important;
 }
 
@@ -472,6 +474,22 @@ html:not(.atcoder-dark-off) .select2-container--default .select2-results__option
 }
 
 /* ── Buttons ────────────────────────────────────────────── */
+/* Kill Bootstrap inset/focus shadows that leave a dark blob behind buttons */
+html:not(.atcoder-dark-off) .btn,
+html:not(.atcoder-dark-off) .btn:hover,
+html:not(.atcoder-dark-off) .btn:focus,
+html:not(.atcoder-dark-off) .btn:active,
+html:not(.atcoder-dark-off) .btn.active,
+html:not(.atcoder-dark-off) .btn:active:focus,
+html:not(.atcoder-dark-off) .btn.active:focus,
+html:not(.atcoder-dark-off) .btn.focus {
+  box-shadow: none !important;
+  text-shadow: none !important;
+  outline: none !important;
+  filter: none !important;
+  background-image: none !important;
+}
+
 html:not(.atcoder-dark-off) .btn-default {
   background-color: var(--ad-bg-muted) !important;
   border-color: var(--ad-border) !important;
@@ -498,9 +516,12 @@ html:not(.atcoder-dark-off) .btn-primary {
 }
 
 html:not(.atcoder-dark-off) .btn-primary:hover,
-html:not(.atcoder-dark-off) .btn-primary:focus {
+html:not(.atcoder-dark-off) .btn-primary:focus,
+html:not(.atcoder-dark-off) .btn-primary:active,
+html:not(.atcoder-dark-off) .btn-primary.active {
   background-color: #388bfd !important;
   border-color: #388bfd !important;
+  color: #fff !important;
 }
 
 html:not(.atcoder-dark-off) .btn-success {
@@ -585,13 +606,30 @@ html:not(.atcoder-dark-off) .alert-danger {
 }
 
 /* ── Code / pre / KaTeX ─────────────────────────────────── */
-html:not(.atcoder-dark-off) pre,
+/* Inline <code> in problem statements (Bootstrap: #c7254e on #f9f2f4).
+   Keep the red accent so letters like `A` stay distinguishable from body text. */
 html:not(.atcoder-dark-off) code,
 html:not(.atcoder-dark-off) kbd,
 html:not(.atcoder-dark-off) samp {
+  background-color: rgba(248, 81, 73, 0.15) !important;
+  color: #ff7b72 !important;
+  border-color: transparent !important;
+}
+
+/* Block <pre> and code-inside-pre (samples / prettyprint) use neutral fg */
+html:not(.atcoder-dark-off) pre {
   background-color: var(--ad-pre-bg) !important;
   color: var(--ad-syn-fg) !important;
   border-color: var(--ad-border) !important;
+}
+
+html:not(.atcoder-dark-off) pre code,
+html:not(.atcoder-dark-off) pre kbd,
+html:not(.atcoder-dark-off) pre samp {
+  background-color: transparent !important;
+  color: inherit !important;
+  border: none !important;
+  padding: 0 !important;
 }
 
 /* Sample I/O blocks — slightly elevated for readability */
@@ -1116,10 +1154,10 @@ html:not(.atcoder-dark-off) tr[style*="background-color:#fff3cd"] {
   background-color: #3d3520 !important;
 }
 
-/* Catch-all: any row with a light/pastel background from extensions */
-html:not(.atcoder-dark-off) tbody tr[style*="background-color: rgb(2"] {
-  filter: brightness(0.4) saturate(1.6) !important;
-}
+/* NOTE: Do NOT use a catch-all filter on rgb(2xx…) rows.
+ * AtCoder Extension AC green is rgb(212, 237, 201) — a brightness()
+ * filter would crush the remapped green into near-black. Only remap
+ * known verdict colors above. */
 
 /* =================================================================
  * VERDICT COMPATIBILITY LAYER (text-based)
@@ -1259,6 +1297,15 @@ html:not(.atcoder-dark-off) #task-statement h3 {
   border-bottom-color: var(--ad-border) !important;
 }
 
+/* Problem-statement figures (B/W grids, diagrams) — invert for dark bg */
+html:not(.atcoder-dark-off) #task-statement img,
+html:not(.atcoder-dark-off) .part img.img-responsive,
+html:not(.atcoder-dark-off) .part img.center-block {
+  filter: invert(1) hue-rotate(180deg);
+  background: transparent !important;
+  border-radius: 4px;
+}
+
 /* Graph / SVG text (ratings etc.) */
 html:not(.atcoder-dark-off) svg text {
   fill: var(--ad-text-muted) !important;
@@ -1388,8 +1435,11 @@ html:not(.atcoder-dark-off) .select2-container--default .select2-results__option
   color: var(--ad-text) !important;
 }
 
-/* ── Submissions Prev/Next plain links (white pills) ─────── */
-html:not(.atcoder-dark-off) .text-center > a:not(.btn):not(.btn-text),
+/* ── Submissions Prev/Next plain links (pills) ─────────────
+   ONLY div.text-center (page pagination) — NOT td.text-center
+   (Tasks table "Submit" links live in td.text-center and must
+   stay as plain blue links without a dark pill behind them). */
+html:not(.atcoder-dark-off) div.text-center > a:not(.btn):not(.btn-text),
 html:not(.atcoder-dark-off) ul.pager > li > a,
 html:not(.atcoder-dark-off) .pager > li > a,
 html:not(.atcoder-dark-off) .pager > li > span {
@@ -1397,13 +1447,26 @@ html:not(.atcoder-dark-off) .pager > li > span {
   border: 1px solid var(--ad-border) !important;
   color: var(--ad-text) !important;
   border-radius: 999px !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
 }
 
-html:not(.atcoder-dark-off) .text-center > a:not(.btn):not(.btn-text):hover,
+html:not(.atcoder-dark-off) div.text-center > a:not(.btn):not(.btn-text):hover,
 html:not(.atcoder-dark-off) ul.pager > li > a:hover,
 html:not(.atcoder-dark-off) .pager > li > a:hover {
   background-color: #30363d !important;
   color: #fff !important;
+}
+
+/* Tasks table Submit / score links — plain text, no chrome */
+html:not(.atcoder-dark-off) td.text-center > a,
+html:not(.atcoder-dark-off) td > a[href*="/submit"] {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
 }
 
 /* ── Highcharts tooltips / rating graph ─────────────────── */

@@ -186,6 +186,7 @@
     /* ignore */
   }
 
+  // Poll gently until CreateJS loads — avoid 10ms busy-loop that freezes navigation.
   const iv = setInterval(() => {
     const cj = window.createjs;
     if (!cj) return;
@@ -198,14 +199,13 @@
     ) {
       clearInterval(iv);
     }
-  }, 10);
+  }, 100);
 
   window.addEventListener("load", () => {
     patchCreatejs(window.createjs);
-    setTimeout(() => patchCreatejs(window.createjs), 0);
     setTimeout(() => patchCreatejs(window.createjs), 50);
-  });
-  setTimeout(() => clearInterval(iv), 20000);
+  }, { once: true });
+  setTimeout(() => clearInterval(iv), 8000);
 
   // ── Floating theme toggle (always present in this page context) ──
   function setDark(enabled) {
@@ -316,23 +316,16 @@
     return !!document.getElementById("atcoder-dark-fab");
   }
 
-  // Body may not exist yet at document_start — observe until mounted
+  // Body may not exist yet at document_start — mount once, then stop.
+  // Do NOT keep a permanent subtree MutationObserver: AtCoder is multi-page
+  // (full navigations), and a always-on observer + FAB re-touch causes jank.
   if (!tryMountFab()) {
     document.addEventListener("DOMContentLoaded", tryMountFab, { once: true });
     window.addEventListener("load", tryMountFab, { once: true });
     const bootIv = setInterval(() => {
       if (tryMountFab()) clearInterval(bootIv);
-    }, 200);
-    setTimeout(() => clearInterval(bootIv), 30000);
-    try {
-      new MutationObserver(() => {
-        if (tryMountFab()) {
-          /* keep observer for SPA-ish replacements */
-        }
-      }).observe(document.documentElement, { childList: true, subtree: true });
-    } catch (_) {
-      /* ignore */
-    }
+    }, 250);
+    setTimeout(() => clearInterval(bootIv), 10000);
   }
 
   // Expose for manual re-inject

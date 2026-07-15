@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.1 — 2026-07-15
+
+- Tasks list: paint AC/WA rows ourselves via `/submissions/me` (task path keys), so hyphenated titles like “Fill-Rect Query” still get green
+- Fix AtCoder Extension light-green rows being crushed by stripe / catch-all CSS
+- Stop whole-document MutationObserver and tighten CreateJS/FAB polling (less freeze on navigation)
+- Inline `code` keeps red accent; task figures invert for dark bg; Submit links no longer get pagination pill chrome
+
 ## 1.2.0 — 2026-07-13
 
 - Verdict compatibility layer: AC/WA/TLE/MLE/RE/CE/WJ high-contrast + glow
