@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.2 — 2026-07-16
+
+- Dark theme for **AtCoder Analytics** profile panel (`.ac-analytics` cards, status, table, tooltip, charts via `currentColor`)
+
 ## 1.2.1 — 2026-07-15
 
 - Tasks list: paint AC/WA rows ourselves via `/submissions/me` (task path keys), so hyphenated titles like “Fill-Rect Query” still get green

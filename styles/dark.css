@@ -1535,5 +1535,112 @@ html:not(.atcoder-dark-off) .text-muted {
   color: var(--ad-text-muted) !important;
 }
 
+/* ── AtCoder Analytics (bmfjngielhkffoekjpdgpedpmelhabhm) ──
+ * Profile-page panel injects .ac-analytics with hardcoded light
+ * surfaces (#fff / #fafafa). Chart text uses currentColor. */
+html:not(.atcoder-dark-off) .ac-analytics,
+html:not(.atcoder-dark-off) #ac-analytics-root {
+  background: var(--ad-bg-elevated) !important;
+  border-color: var(--ad-border) !important;
+  color: var(--ad-text) !important;
+  box-shadow: 0 8px 24px var(--ad-shadow) !important;
+}
+
+html:not(.atcoder-dark-off) .ac-analytics__title {
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .ac-analytics__sub,
+html:not(.atcoder-dark-off) .ac-analytics__legend,
+html:not(.atcoder-dark-off) .ac-analytics__unsolvedMeta,
+html:not(.atcoder-dark-off) .ac-analytics__tagCount {
+  color: var(--ad-text-muted) !important;
+  opacity: 1 !important;
+}
+
+html:not(.atcoder-dark-off) .ac-analytics__cardTitle {
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .ac-analytics__btn {
+  background: var(--ad-bg-muted) !important;
+  border-color: var(--ad-border) !important;
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .ac-analytics__btn:hover {
+  background: var(--ad-bg-soft) !important;
+  border-color: #484f58 !important;
+  color: #fff !important;
+}
+
+html:not(.atcoder-dark-off) .ac-analytics__status {
+  background: var(--ad-bg-muted) !important;
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .ac-analytics__status[data-kind="ok"] {
+  background: rgba(63, 185, 80, 0.14) !important;
+  color: var(--ad-success) !important;
+}
+
+html:not(.atcoder-dark-off) .ac-analytics__status[data-kind="error"] {
+  background: rgba(248, 81, 73, 0.14) !important;
+  color: var(--ad-danger) !important;
+}
+
+html:not(.atcoder-dark-off) .ac-analytics__card {
+  background: var(--ad-bg-soft) !important;
+  border-color: var(--ad-border) !important;
+}
+
+html:not(.atcoder-dark-off) .ac-analytics__chart,
+html:not(.atcoder-dark-off) .ac-analytics__donut {
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .ac-analytics__bar:hover {
+  filter: brightness(1.12) !important;
+}
+
+html:not(.atcoder-dark-off) .ac-analytics__swatch {
+  border-color: var(--ad-border) !important;
+}
+
+html:not(.atcoder-dark-off) .ac-analytics__tagRow {
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .ac-analytics__tableWrap {
+  border-color: var(--ad-border) !important;
+  background: var(--ad-bg-elevated) !important;
+}
+
+html:not(.atcoder-dark-off) .ac-analytics__table {
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .ac-analytics__table th,
+html:not(.atcoder-dark-off) .ac-analytics__table td {
+  border-bottom-color: var(--ad-border) !important;
+  color: var(--ad-text) !important;
+}
+
+html:not(.atcoder-dark-off) .ac-analytics__table th {
+  background: var(--ad-bg-muted) !important;
+  color: var(--ad-text-muted) !important;
+}
+
+html:not(.atcoder-dark-off) .ac-analytics__table tbody tr:hover td {
+  background: var(--ad-table-hover) !important;
+}
+
+html:not(.atcoder-dark-off) .ac-analytics__tooltip {
+  background: rgba(22, 27, 34, 0.96) !important;
+  border-color: var(--ad-border) !important;
+  color: var(--ad-text) !important;
+  box-shadow: 0 8px 24px var(--ad-shadow) !important;
+}
+
 /* (prettify + ACE token colors defined in Code section above) */
 
