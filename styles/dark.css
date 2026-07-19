@@ -864,10 +864,48 @@ html:not(.atcoder-dark-off) .ace_fold-widget {
   color: var(--ad-syn-gutter) !important;
 }
 
-/* KaTeX: keep formulas readable */
+/* KaTeX: inherit so author colors (e.g. red updated constraints) survive.
+ * Default body/#main-container already supply --ad-text. */
 html:not(.atcoder-dark-off) .katex,
 html:not(.atcoder-dark-off) .katex-display {
-  color: var(--ad-text) !important;
+  color: inherit !important;
+}
+
+/* Statement emphasis — AtCoder often marks revised lines with red
+ * via <font color="red">, style=, or .red; keep them bright on dark bg. */
+html:not(.atcoder-dark-off) font[color="red"],
+html:not(.atcoder-dark-off) font[color="Red"],
+html:not(.atcoder-dark-off) font[color="#ff0000"],
+html:not(.atcoder-dark-off) font[color="#FF0000"],
+html:not(.atcoder-dark-off) font[color="#f00"],
+html:not(.atcoder-dark-off) font[color="#F00"],
+html:not(.atcoder-dark-off) [style^="color:red"],
+html:not(.atcoder-dark-off) [style^="color: red"],
+html:not(.atcoder-dark-off) [style^="color:#ff0000"],
+html:not(.atcoder-dark-off) [style^="color:#FF0000"],
+html:not(.atcoder-dark-off) [style^="color: #ff0000"],
+html:not(.atcoder-dark-off) [style^="color: #FF0000"],
+html:not(.atcoder-dark-off) [style*=";color:red"],
+html:not(.atcoder-dark-off) [style*=";color: red"],
+html:not(.atcoder-dark-off) [style*="; color:red"],
+html:not(.atcoder-dark-off) [style*="; color: red"],
+html:not(.atcoder-dark-off) [style*=";color:#ff0000"],
+html:not(.atcoder-dark-off) [style*=";color:#FF0000"],
+html:not(.atcoder-dark-off) [style*="; color:#ff0000"],
+html:not(.atcoder-dark-off) [style*="; color:#FF0000"],
+html:not(.atcoder-dark-off) [style*=";color: #ff0000"],
+html:not(.atcoder-dark-off) [style*="; color: #ff0000"] {
+  color: #ff7b72 !important;
+}
+
+/* KaTeX \textcolor{red}{…} / \color{red} — style lands on inner spans */
+html:not(.atcoder-dark-off) .katex [style^="color:red"],
+html:not(.atcoder-dark-off) .katex [style^="color: red"],
+html:not(.atcoder-dark-off) .katex [style*=";color:red"],
+html:not(.atcoder-dark-off) .katex [style*="; color:red"],
+html:not(.atcoder-dark-off) .katex [style*=";color: red"],
+html:not(.atcoder-dark-off) .katex [style*="; color: red"] {
+  color: #ff7b72 !important;
 }
 
 /* ── Modals ─────────────────────────────────────────────── */

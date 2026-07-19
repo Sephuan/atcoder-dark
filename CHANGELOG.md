@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.3 — 2026-07-16
+
+- Preserve red emphasis in problem statements (updated constraints): KaTeX inherits author color instead of forcing body text color
+
 ## 1.2.2 — 2026-07-16
 
 - Dark theme for **AtCoder Analytics** profile panel (`.ac-analytics` cards, status, table, tooltip, charts via `currentColor`)
